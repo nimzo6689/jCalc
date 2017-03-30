@@ -1,0 +1,45 @@
+digraph ICalcSate {
+
+  graph [
+    charset = "UTF-8";
+    label = "ICalcState.java",
+    labelloc = "b",
+    labeljust = "c",
+    fontsize = 18,
+    style = "filled",
+    rankdir = LR,
+    margin = 0.5,
+    splines = spline,
+    ranksep = 1.0,
+    nodesep = 0.5
+  ];
+
+  node [
+    fontsize = 14,
+    margin = 0.05,
+  ];
+
+  empty [label = "" shape = plaintext];
+  node [shape = doublecircle]; Result;
+  node [shape = circle];
+
+  empty -> RegisterA [label = "start"];
+
+  RegisterA -> Operation [label = "Ope"];
+  RegisterA -> RegisterA [label = "Num, Clear"];
+  RegisterA -> Result [label = "Equal"];
+
+  Operation -> RegisterA [label = "Clear"];
+  Operation -> Operation [label = "Ope"];
+  Operation -> RegisterB [label = "Num"];
+  Operation -> Result [label = "Equal"];
+
+  RegisterB -> Operation [label = "Ope"];
+  RegisterB -> RegisterB [label = "Num, Clear"];
+  RegisterB -> Result [label = "Equal"];
+
+  Result -> RegisterA [label = "Num, Clear"];
+  Result -> Operation [label = "Ope"];
+  Result -> Result [label = "Equal"];
+
+}
