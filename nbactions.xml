@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <action>
+        <actionName>run</actionName>
+        <goals>
+            <goal>clean</goal>
+            <goal>jfx:run</goal>
+        </goals>
+        <properties>
+            <runfx.args>-jar "${project.build.directory}/${project.build.finalName}.jar"</runfx.args>
+        </properties>
+    </action>
+    <action>
+        <actionName>debug</actionName>
+        <goals>
+            <goal>clean</goal>
+            <goal>package</goal>
+            <goal>jfx:run</goal>
+        </goals>
+        <properties>
+            <runfx.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -Dglass.disableGrab=true -jar "${project.build.directory}/${project.build.finalName}.jar"</runfx.args>
+            <jpda.listen>true</jpda.listen>
+        </properties>
+    </action>
+    <action>
+        <actionName>build</actionName>
+        <packagings>
+            <packaging>*</packaging>
+        </packagings>
+        <goals>
+            <goal>jfx:jar</goal>
+        </goals>
+    </action>
+    <action>
+        <actionName>rebuild</actionName>
+        <packagings>
+            <packaging>*</packaging>
+        </packagings>
+        <goals>
+            <goal>clean</goal>
+            <goal>jfx:jar</goal>
+        </goals>
+    </action>
+    <action>
+        <actionName>build-with-dependencies</actionName>
+        <reactor>also-make</reactor>
+        <packagings>
+            <packaging>*</packaging>
+        </packagings>
+        <goals>
+            <goal>jfx:jar</goal>
+        </goals>
+    </action>
+</actions>
