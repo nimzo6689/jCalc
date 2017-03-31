@@ -26,8 +26,8 @@ package com.qiita.nimzo6689.calculator;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 
@@ -41,24 +41,17 @@ public final class CalcMain extends Application {
         launch(args);
     }
 
-    private Stage primaryStage;
-    private AnchorPane anchorPane;
-
     @Override
     public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        primaryStage.setResizable(true);
-        createView();
+        Stage stage = primaryStage;
+        stage.setResizable(true);
+        stage.setScene(new Scene(getParent()));
+        stage.show();
     }
 
     @SneakyThrows(IOException.class)
-    private void createView() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainView.fxml"));
-        anchorPane = (AnchorPane) loader.load();
-
-        Scene scene = new Scene(anchorPane);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    private Parent getParent() {
+        return FXMLLoader.load(getClass().getResource("mainView.fxml"));
     }
 
 }

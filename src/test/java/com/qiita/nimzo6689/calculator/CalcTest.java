@@ -23,18 +23,43 @@
  */
 package com.qiita.nimzo6689.calculator;
 
-import static org.junit.Assert.assertEquals;
+import java.lang.reflect.Method;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import lombok.SneakyThrows;
 import org.junit.Test;
+import static org.testfx.api.FxAssert.verifyThat;
+import org.testfx.framework.junit.ApplicationTest;
+import static org.testfx.matcher.base.NodeMatchers.hasText;
 
 /**
  *
  * @author nimzo6689
  */
-public class MainTest {
+public class CalcTest extends ApplicationTest {
+
+    @Override
+    @SneakyThrows
+    public void start(Stage stage) throws IllegalAccessException {
+        CalcMain calcMain = new CalcMain();
+        Method method = calcMain.getClass().getDeclaredMethod("getParent");
+        method.setAccessible(true);
+        stage.setScene(new Scene((Parent) method.invoke(calcMain)));
+        stage.show();
+    }
 
     @Test
-    public final void testCalc() {
-        assertEquals(0, 0);
+    public void should_drag_file_into_trashcan() {
+        // given:
+        clickOn("1");
+        clickOn("2");
+        clickOn("#plus");
+        clickOn("4");
+        clickOn("#equal");
+
+        // then:
+        verifyThat("#display", hasText("16"));
     }
 
 }
