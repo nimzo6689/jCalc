@@ -24,9 +24,12 @@
 package com.qiita.nimzo6689.calculator.code;
 
 import java.math.BigDecimal;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum Operation {
     PLUS("plus") {
         public BigDecimal eval(BigDecimal x, BigDecimal y) {
@@ -65,10 +68,6 @@ public enum Operation {
     }
 
     private final String value;
-
-    private Operation(final String value) {
-        this.value = value;
-    }
 
     /**
      * 演算子ごとの評価を実施

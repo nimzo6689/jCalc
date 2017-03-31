@@ -31,38 +31,38 @@ import javafx.event.Event;
  * @author nimzo6689
  */
 public interface ICalcState {
-    
-     /**
-     * 「数字、カンマ、％」がクリックされた時のイベント処理
+
+    /**
+     * Event handling for number, "," and "%".
      *
      * @param event
      */
     public void onInputNumber(Event event, CalcController controller);
 
     /**
-     * 「＋ー×÷」ボタンが押された時のイベント処理
+     * Event handling for operation.
      *
      * @param event
      */
     public void onInputOperation(Event event, CalcController controller);
 
     /**
-     * 「=」ボタンが押された時のイベント処理
+     * Event handling for "=".
      *
      * @param event
      */
     public void onInputEqual(Event event, CalcController controller);
 
     /**
-     * 「C、AC」ボタンが押された時のイベント処理
+     * Event handling for "C" and "AC".
      *
      * @param event
      */
     public void onInputClear(Event event, CalcController controller);
 
     /**
-     * 「+/-」ボタンが押された時のイベント処理
+     * Event handling for "+/-".
      */
     public void onInputSign(CalcController controller);
-    
+
 }

@@ -24,13 +24,16 @@
 package com.qiita.nimzo6689.calculator.code;
 
 import javafx.scene.control.TextArea;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  *
  * @author nimzo6689
  */
 @Getter
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum CalcNumber {
 
     COMMA("comma", "."),
@@ -63,11 +66,6 @@ public enum CalcNumber {
 
     private final String value;
     private final String number;
-
-    private CalcNumber(String value, String number) {
-        this.value = value;
-        this.number = number;
-    }
 
     /**
      *

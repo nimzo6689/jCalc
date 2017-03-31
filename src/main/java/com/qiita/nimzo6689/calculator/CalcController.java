@@ -24,8 +24,8 @@
 package com.qiita.nimzo6689.calculator;
 
 import com.qiita.nimzo6689.calculator.code.Operation;
-import com.qiita.nimzo6689.calculator.state.DefaultState;
 import com.qiita.nimzo6689.calculator.state.ICalcState;
+import com.qiita.nimzo6689.calculator.state.RegisterAState;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,26 +44,28 @@ import lombok.extern.log4j.Log4j2;
  */
 @Log4j2
 @Getter
-@Setter
 public class CalcController implements Initializable {
 
     /**
-     * ディスプレイに表示される初期値
+     * for display.
      */
     public static final String DEFAULT_VALUE = "0";
 
     @FXML
+    @Setter
     private TextArea display;
 
     /**
-     * 状態ごとに「C」「AC」の表示が切り替えられるボタン
+     * The button has "Clear" and "All Clear" meaning.
      */
     @FXML
-    private Button buttonDelete;
-
+    @Setter
+    private Button clear;
+    @Setter
     private Operation operation;
-
+    @Setter
     private BigDecimal registerA;
+    @Setter
     private BigDecimal registerB;
 
     private ICalcState calcState;
@@ -72,54 +74,59 @@ public class CalcController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         display.setEditable(false);
         display.setText(DEFAULT_VALUE);
-        calcState = DefaultState.INSTANCE;
+        calcState = RegisterAState.INSTANCE;
+    }
+
+    public void changeCalcStateTo(ICalcState calcState) {
+        log.debug("Change CalcState " + this.calcState + " -> " + calcState);
+        this.calcState = calcState;
     }
 
     /**
-     * 「数字、カンマ、％」がクリックされた時のイベント処理
+     * On input Number, "," or "%", delegate ICalcState instance.
      *
      * @param event
      */
     @FXML
-    public void onInputNumber(Event event) {
+    private void onInputNumber(Event event) {
         calcState.onInputNumber(event, this);
     }
 
     /**
-     * 「＋ー×÷」ボタンが押された時のイベント処理
+     * On input Operation, delegate ICalcState instance.
      *
      * @param event
      */
     @FXML
-    public void onInputOperation(Event event) {
+    private void onInputOperation(Event event) {
         calcState.onInputOperation(event, this);
     }
 
     /**
-     * 「=」ボタンが押された時のイベント処理
+     * On input "=", delegate ICalcState instance.
      *
      * @param event
      */
     @FXML
-    public void onInputEqual(Event event) {
+    private void onInputEqual(Event event) {
         calcState.onInputEqual(event, this);
     }
 
     /**
-     * 「C、AC」ボタンが押された時のイベント処理
+     * On input "C" or "AC", delegate ICalcState instance.
      *
      * @param event
      */
     @FXML
-    public void onInputClear(Event event) {
+    private void onInputClear(Event event) {
         calcState.onInputClear(event, this);
     }
 
     /**
-     * 「+/-」ボタンが押された時のイベント処理
+     * On input "+/-", delegate ICalcState instance.
      */
     @FXML
-    public void onInputSign() {
+    private void onInputSign() {
         calcState.onInputSign(this);
     }
 
