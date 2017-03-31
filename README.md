@@ -88,7 +88,7 @@ This app is implemented with State pattern like bellow.
             ＝
           </td>
           <td>
-            Show value on input.<br>
+            Show value on input.<br>
             &rarr; R
           </td>
           <td>
@@ -110,11 +110,11 @@ This app is implemented with State pattern like bellow.
             Clear/All Clear
           </td>
           <td>
-            Clear registerA display.<br>
+            Clear registerA and display.<br>
             &rarr; No change.
           </td>
           <td>
-            Clear registerA display.<br>
+            Clear registerA and display.<br>
             &rarr; A
           </td>
           <td>
