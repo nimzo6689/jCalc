@@ -24,34 +24,67 @@
 package com.qiita.nimzo6689.calculator.state;
 
 import com.qiita.nimzo6689.calculator.CalcController;
+import com.qiita.nimzo6689.calculator.code.CalcNumber;
+import java.math.BigDecimal;
 import javafx.event.Event;
+import javafx.scene.control.Button;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  *
  * @author nimzo6689
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@ToString
 public enum ResultState implements ICalcState {
-    
+
     INSTANCE {
         @Override
         public void onInputNumber(Event event, CalcController controller) {
+            Button btn = (Button) event.getSource();
+            CalcNumber calcNumber = CalcNumber.of(btn.getId());
+            if (CalcNumber.ZERO == calcNumber) {
+                controller.getClear().setText("C");
+                controller.getDisplay().setText("");
+            }
+            calcNumber.appendNumberTo(controller.getDisplay());
+
+            controller.changeCalcStateTo(RegisterAState.INSTANCE);
         }
 
         @Override
         public void onInputOperation(Event event, CalcController controller) {
+            BigDecimal result = controller.getOperation().eval(controller.getRegisterA(), controller.getRegisterB());
+            controller.getDisplay().setText(result.toPlainString());
+            controller.setRegisterA(result);
+            controller.setRegisterB(BigDecimal.ZERO);
+
+            controller.changeCalcStateTo(OperationState.INSTANCE);
         }
 
         @Override
         public void onInputEqual(Event event, CalcController controller) {
+            // Do nothing.
         }
 
         @Override
         public void onInputClear(Event event, CalcController controller) {
+            controller.setRegisterA(BigDecimal.ZERO);
+            controller.setRegisterB(BigDecimal.ZERO);
+            controller.getDisplay().setText(CalcController.DEFAULT_VALUE);
+
+            controller.changeCalcStateTo(RegisterAState.INSTANCE);
         }
 
         @Override
         public void onInputSign(CalcController controller) {
+            BigDecimal number = new BigDecimal(controller.getDisplay().getText());
+            if (number != BigDecimal.ZERO) {
+                controller.getDisplay().setText(number.negate().toPlainString());
+            }
         }
     }
-    
+
 }
