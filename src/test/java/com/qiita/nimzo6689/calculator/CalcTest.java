@@ -41,7 +41,7 @@ public class CalcTest extends ApplicationTest {
 
     @Override
     @SneakyThrows
-    public void start(Stage stage) throws IllegalAccessException {
+    public void start(Stage stage) {
         CalcMain calcMain = new CalcMain();
         Method method = calcMain.getClass().getDeclaredMethod("getParent");
         method.setAccessible(true);

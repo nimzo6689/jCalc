@@ -51,4 +51,13 @@
             <goal>jfx:jar</goal>
         </goals>
     </action>
+    <action>
+            <actionName>CUSTOM-clean site</actionName>
+            <displayName>clean site</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>site</goal>
+            </goals>
+        </action>
+    
 </actions>
