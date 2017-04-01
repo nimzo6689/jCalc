@@ -9,7 +9,7 @@ Simple calculator created with JavaFX, Maven.
 ## Design
 
 This app is implemented with State pattern like bellow.
-![alt tag](https://github.com/nimzo6689/jCalc/blob/master/documents/ICalcSate.png)
+![alt tag](https://raw.githubusercontent.com/nimzo6689/jCalc/master/documents/ICalcSate.png)
 
 
 <table class="tbl">
