@@ -65,7 +65,7 @@ This app is implemented with State pattern like bellow.
             Save operator type.<br>
             &rarr; C
           </td>
-          <td>
+)          <td>
             Save operator type.<br>
             &rarr; No change.
           </td>
@@ -93,7 +93,7 @@ This app is implemented with State pattern like bellow.
           </td>
           <td>
             In the case of &divide;, &times; Show [RegisterA Operation RegisterB] on display.<br>
-            In the case of + or -, show registerA on display.<br>
+            In the case of + or -, show registerA on display.<br>
             &rarr; R
           </td>
           <td>
@@ -128,3 +128,5 @@ This app is implemented with State pattern like bellow.
         </tr>
       </tbody>
     </table>
+
+[Project Site](https://nimzo6689.github.io/jCalc/)
