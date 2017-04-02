@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.6</version>
+    </skin>
+    
+    <body>
+        <menu name="Info and reports" inherit="bottom">
+            <item name="Reports" href="./project-reports.html" />
+        </menu>
+        <menu name="Code" inherit="bottom">
+            <item name="SCM" href="${project.scm.url}">
+                <description>GitHub</description>
+            </item>
+            <item name="CI" href="${project.ciManagement.url}">
+                <description>${project.ciManagement.system}</description>
+            </item>
+            <item name="Issues" href="${project.issueManagement.url}">
+                <description>${project.issueManagement.system}</description>
+            </item>
+        </menu>
+    </body>
+</project>

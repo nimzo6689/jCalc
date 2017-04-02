@@ -51,8 +51,8 @@ public enum CalcNumber {
 
     /**
      *
-     * @param value
-     * @return
+     * @param value FXML id attribute for Number.
+     * @return CalcNumber enum object.
      */
     public static CalcNumber of(String value) {
         for (CalcNumber calcNumber : CalcNumber.values()) {
@@ -69,7 +69,7 @@ public enum CalcNumber {
 
     /**
      *
-     * @param textArea
+     * @param textArea display object in FXML.
      */
     public void appendNumberTo(TextArea textArea) {
         textArea.appendText(number);

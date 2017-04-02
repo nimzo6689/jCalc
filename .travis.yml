@@ -1,9 +1,14 @@
+# Travis CI Configuration file
+# @link https://travis-ci.org/
+
+# Using Java for the project
 language: java
 
 jdk:
   - oraclejdk8
 
 before_install:
+  # For running JavaFX testing in CI environment. 
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 

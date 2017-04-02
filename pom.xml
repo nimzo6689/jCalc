@@ -2,27 +2,76 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- ********************************************** -->
+    <!-- **************** PROJECT INFO **************** -->
+    <!-- ********************************************** -->
+
     <groupId>com.qiita.nimzo6689</groupId>
     <artifactId>jCalc</artifactId>
-    <version>1.0</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <name>jCalc</name>
     <description>Simple calculator created with JavaFX, Maven.</description>
+    <url>https://nimzo6689.github.io/jCalc/</url>
     <inceptionYear>2017</inceptionYear>
-    <url>https://github.com/nimzo6689/jCalc</url>
+    
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!-- ********************************************** -->
+    <!-- ********* INFRASTRUCTURE AND SERVICES ******** -->
+    <!-- ********************************************** -->
 
     <scm>
-        <url>https://github.com/nimzo6689/jCalc.git</url>
+        <connection>scm:git:https://github.com/nimzo6689/jCalc.git</connection>
+        <developerConnection>scm:git:https://github.com/nimzo6689/jCalc.git</developerConnection>
+        <tag>head</tag>
+        <url>https://github.com/nimzo6689/jCalc</url>
     </scm>
+    
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/nimzo6689/jCalc/issues</url>
+    </issueManagement>
 
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/nimzo6689/jCalc</url>
+        <notifiers />
+    </ciManagement>
+
+    <!-- ********************************************** -->
+    <!-- ****************** PROFILES ****************** -->
+    <!-- ********************************************** -->
+    
+    <!--No profiles-->
+    
+    <!-- ********************************************** -->
+    <!-- *********** ORGANIZATION AND MEMBERS ********* -->
+    <!-- ********************************************** -->
+    
     <developers>
         <developer>
             <id>nimzo6689</id>
             <url>https://github.com/nimzo6689</url>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+9</timezone>
+            <properties />
         </developer>
     </developers>
-    
+
+    <!-- ********************************************** -->
+    <!-- **************** PROPERTIES ****************** -->
+    <!-- ********************************************** -->
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -30,6 +79,10 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <org.testfx.version>4.0.6-alpha</org.testfx.version>
     </properties>
+    
+    <!-- ********************************************** -->
+    <!-- *************** DEPENDENCIES ***************** -->
+    <!-- ********************************************** -->
 
     <dependencies>
         <!-- Utilities -->
@@ -71,8 +124,12 @@
         </dependency>
     </dependencies>
     
+    <!-- ********************************************** -->
+    <!-- ******************* BUILD ******************** -->
+    <!-- ********************************************** -->
+    
     <build>
-        <finalName>${project.name}</finalName>
+        <defaultGoal>clean jfx:run</defaultGoal>
         <plugins>
             <!--Java compiler-->
             <plugin>
@@ -93,13 +150,14 @@
                     <mainClass>com.qiita.nimzo6689.calculator.CalcMain</mainClass>
                 </configuration>
             </plugin>
-            <!--To specify encoding for surefire.-->
+            <!--Project Site settings.-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.6</version>
                 <configuration>
-                    <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
+                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                    <outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
                 </configuration>
             </plugin>
             <!--To show coverage status on GitHub with Travis CI-->
@@ -129,25 +187,39 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--To specify reports-plugin version-->
+        </plugins>
+    </build>
+    
+    <!-- ********************************************** -->
+    <!-- ****************** REPORTS ******************* -->
+    <!-- ********************************************** -->
+    
+    <reporting>
+        <outputDirectory>${basedir}/docs/site</outputDirectory>
+        <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>2.9</version>
             </plugin>
-        </plugins>
-    </build>
-    
-    <reporting>
-        <plugins>
             <plugin>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.6</version>
-                <configuration>
-                    <locales>ja</locales>
-                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
-                    <outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
-                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                    <reportSet>
+                        <id>aggregate</id>
+                        <inherited>false</inherited>
+                        <reports>
+                            <report>aggregate</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
             </plugin>
             <plugin>
                 <artifactId>maven-jxr-plugin</artifactId>
@@ -162,45 +234,9 @@
                 <artifactId>maven-surefire-report-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
-                    <showSuccess>false</showSuccess>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.17</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.7</version>
-                <configuration>
-                    <targetJdk>${maven.compiler.target}</targetJdk>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>pmd</report>
-                            <report>cpd</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.4</version>
-                <configuration>
                     <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
                     <outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <formats>
-                        <format>html</format>
-                    </formats>
+                    <showSuccess>false</showSuccess>
                 </configuration>
             </plugin>
             <plugin>
@@ -223,17 +259,36 @@
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>javancss-maven-plugin</artifactId>
-                <version>2.1</version>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>3.0.4</version>
+                <configuration>
+                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                    <outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.7</version>
+                <configuration>
+                    <targetJdk>${maven.compiler.target}</targetJdk>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.17</version>
             </plugin>
         </plugins>
     </reporting>
-    
+
+    <!-- ********************************************** -->
+    <!-- ************* PLUGIN REPOSITORIES ************ -->
+    <!-- ********************************************** -->
+
     <pluginRepositories>
         <pluginRepository>
             <id>Codehaus repository</id>
             <url>http://repository.codehaus.org/</url>
         </pluginRepository>
     </pluginRepositories>
-    
+
 </project>

@@ -54,8 +54,8 @@ public enum Operation {
 
     /**
      *
-     * @param value
-     * @return
+     * @param value operator type. plus, minus, times or divide.
+     * @return Operation enum object.
      */
     public static Operation of(String value) {
         for (Operation operation : Operation.values()) {
@@ -70,11 +70,11 @@ public enum Operation {
     private final String value;
 
     /**
-     * 演算子ごとの評価を実施
+     * Evaluate for each operation.
      *
-     * @param x
-     * @param y
-     * @return
+     * @param x left operator.
+     * @param y right operator.
+     * @return result.
      */
     abstract public BigDecimal eval(BigDecimal x, BigDecimal y);
 

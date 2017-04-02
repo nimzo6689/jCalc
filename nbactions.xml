@@ -59,5 +59,14 @@
                 <goal>site</goal>
             </goals>
         </action>
+    <action>
+            <actionName>CUSTOM-clean verify site</actionName>
+            <displayName>clean verify site</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>verify</goal>
+                <goal>site</goal>
+            </goals>
+        </action>
     
 </actions>

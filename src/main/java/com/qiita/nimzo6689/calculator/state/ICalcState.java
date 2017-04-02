@@ -35,33 +35,39 @@ public interface ICalcState {
     /**
      * Event handling for number, "," and "%".
      *
-     * @param event
+     * @param event Corresponding to FXML element.
+     * @param controller Calculator's controller.
      */
     public void onInputNumber(Event event, CalcController controller);
 
     /**
      * Event handling for operation.
      *
-     * @param event
+     * @param event Corresponding to FXML element.
+     * @param controller Calculator's controller.
      */
     public void onInputOperation(Event event, CalcController controller);
 
     /**
      * Event handling for "=".
      *
-     * @param event
+     * @param event Corresponding to FXML element.
+     * @param controller Calculator's controller.
      */
     public void onInputEqual(Event event, CalcController controller);
 
     /**
      * Event handling for "C" and "AC".
      *
-     * @param event
+     * @param event Corresponding to FXML element.
+     * @param controller Calculator's controller.
      */
     public void onInputClear(Event event, CalcController controller);
 
     /**
      * Event handling for "+/-".
+     *
+     * @param controller Calculator's controller.
      */
     public void onInputSign(CalcController controller);
 

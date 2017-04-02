@@ -39,6 +39,10 @@ import static org.testfx.matcher.base.NodeMatchers.hasText;
  */
 public class CalcTest extends ApplicationTest {
 
+    /**
+     *
+     * @param stage stage
+     */
     @Override
     @SneakyThrows
     public void start(Stage stage) {
@@ -49,8 +53,11 @@ public class CalcTest extends ApplicationTest {
         stage.show();
     }
 
+    /**
+     *
+     */
     @Test
-    public void should_drag_file_into_trashcan() {
+    public void should_12_plus_4_equal_16() {
         // given:
         clickOn("1");
         clickOn("2");

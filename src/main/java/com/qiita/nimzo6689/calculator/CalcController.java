@@ -70,6 +70,15 @@ public class CalcController implements Initializable {
 
     private ICalcState calcState;
 
+    /**
+     *
+     * @param location The location used to resolve relative paths for the root
+     * object, or
+     * <tt>null</tt> if the location is not known.
+     *
+     * @param resources The resources used to localize the root object, or
+     * <tt>null</tt> if the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         display.setEditable(false);
@@ -77,6 +86,10 @@ public class CalcController implements Initializable {
         calcState = RegisterAState.INSTANCE;
     }
 
+    /**
+     *
+     * @param calcState The state of calculator.
+     */
     public void changeCalcStateTo(ICalcState calcState) {
         log.debug("Change CalcState " + this.calcState + " -> " + calcState);
         this.calcState = calcState;
@@ -85,7 +98,7 @@ public class CalcController implements Initializable {
     /**
      * On input Number, "," or "%", delegate ICalcState instance.
      *
-     * @param event
+     * @param event Corresponding to FXML element.
      */
     @FXML
     private void onInputNumber(Event event) {
@@ -95,7 +108,7 @@ public class CalcController implements Initializable {
     /**
      * On input Operation, delegate ICalcState instance.
      *
-     * @param event
+     * @param event Corresponding to FXML element.
      */
     @FXML
     private void onInputOperation(Event event) {
@@ -105,7 +118,7 @@ public class CalcController implements Initializable {
     /**
      * On input "=", delegate ICalcState instance.
      *
-     * @param event
+     * @param event Corresponding to FXML element.
      */
     @FXML
     private void onInputEqual(Event event) {
@@ -115,7 +128,7 @@ public class CalcController implements Initializable {
     /**
      * On input "C" or "AC", delegate ICalcState instance.
      *
-     * @param event
+     * @param event Corresponding to FXML element.
      */
     @FXML
     private void onInputClear(Event event) {
