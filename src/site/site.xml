@@ -32,6 +32,7 @@
         <menu name="Other services" inherit="bottom">
             <item name="GitHub" href="${project.scm.url}" />
             <item name="Travis CI" href="${project.ciManagement.url}" />
+            <item name="Coveralls" href="https://coveralls.io/github/nimzo6689/jCalc" />
             <item name="Issues" href="${project.issueManagement.url}" />
         </menu>
         
