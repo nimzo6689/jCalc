@@ -12,7 +12,7 @@
     <packaging>jar</packaging>
 
     <name>jCalc</name>
-    <description>Simple calculator created with JavaFX, Maven.</description>
+    <description>A simple calculator which is created with JavaFX and Maven.</description>
     <url>https://nimzo6689.github.io/jCalc/</url>
     <inceptionYear>2017</inceptionYear>
     
