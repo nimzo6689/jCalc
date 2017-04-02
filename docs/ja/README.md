@@ -14,8 +14,8 @@ JavaFX + Maven で開発したシンプルな電卓アプリです。
 ## 目的
 
 - 実際の業務でも適用できる水準で実装されたJavaFXアプリのデモを行うこと。
-- Mavenを利用したCIツールの構築すること。
-- JavaFX周辺技術の例示すること。
+- Mavenを利用したCI環境の構築をすること。
+- JavaFXの周辺技術の例示となること。
 
 ## 実行方法
 
@@ -27,7 +27,7 @@ mvn clear jfx:run
 
 ## 設計
 
-当アプリは下記に示す通り、Stateパターンを用いて実装しています。
+当アプリはStateパターンを用いて実装しています。状態遷移は下の図の通りです。
 ![alt tag](https://raw.githubusercontent.com/nimzo6689/jCalc/master/documents/ICalcSate.png)
 
 ## CIツールによる出力内容
