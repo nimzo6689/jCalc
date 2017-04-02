@@ -32,7 +32,7 @@
         <menu name="Other services" inherit="bottom">
             <item name="GitHub" href="${project.scm.url}" />
             <item name="Travis CI" href="${project.scm.url}" />
-            <item name="Issues" href="${project.issueManagement.url}" />
+            <item name="Issues" href="${project.ciManagement.url}" />
         </menu>
         
     </body>
