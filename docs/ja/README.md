@@ -3,33 +3,35 @@
 [![Build Status](https://travis-ci.org/nimzo6689/jCalc.svg?branch=master)](https://travis-ci.org/nimzo6689/jCalc)
 [![Coverage Status](https://coveralls.io/repos/github/nimzo6689/jCalc/badge.svg)](https://coveralls.io/github/nimzo6689/jCalc)
 [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/nimzo6689/jCalc/blob/master/LICENSE)
+<p align="right"><a href="..">English</a></p>
 
-A simple calculator which is created with JavaFX and Maven.
+JavaFX + Maven で開発したシンプルな電卓アプリです。
 
-## Overview
+## 概要
 
-This project demonstrates how you can develop applications with the Java FX platform using CI tools. The code is intended to mirror a simple calculator application that developers in the real work would work on. It attempts to demonstrate first-hand how you can use Java FX to effectively meet practical enterprise concerns such as productivity, agility, testability, flexibility and maintainability.
+当プロジェクトはCI（継続的インテグレーション）ツールを用いてJavaFXアプリの開発を行うためのデモとなります。実際の業務でも同じような実装、設定内容でも済むように心掛けました。JavaFX開発を始めてする人にとって、より生産性、機敏性、保守性、柔軟性を向上させるヒントになればと考えています。
 
-## Goals
+## 目的
 
-- Demonstrate well established architectural patterns/blueprints for enterprise development with Java FX using pretty close to a real world application.
-- Demonstre a build settings of CI concepts.
-- Showcase some core Java FX technologies.
+- 実際の業務でも適用できる水準で実装されたJavaFXアプリのデモを行うこと。
+- Mavenを利用したCIツールの構築すること。
+- JavaFX周辺技術の例示すること。
 
-## Getting Started
+## 実行方法
 
-If you simply wish to explore the code, download it as a Zip or browse the repository.
-The source is a Maven project, so you should be able to easily build it or set it up in your favorite IDE.
+ソースコードはGitHubページからZip形式でダウンロードするか、ブラウザ上からでも閲覧することができます。
+当アプリはMavenを使用しているため、お好きなIDEで簡単にビルドが行えます。
 
-You can also run the application directly from the Maven command line. All you need to is navigate to the project source root and type: mvn clear jfx:run
+また、CUI上でMavenコマンドから直接実行することも可能です。その場合は以下のコマンドになります。
+mvn clear jfx:run
 
-## Background
+## 設計
 
-This app is implemented with State pattern like bellow.
+当アプリは下記に示す通り、Stateパターンを用いて実装しています。
 ![alt tag](https://raw.githubusercontent.com/nimzo6689/jCalc/master/documents/ICalcSate.png)
 
-## Reports of CI tools.
+## CIツールによる出力内容
 
-If you confirm maven site reports of current repository, you can get it by bellow link.
+現在のソースコードのメトリクスやJavaDoc、ビルド内容は下記のリンクにて閲覧可能です。
 
 [jCalc Project Site](https://nimzo6689.github.io/jCalc/site/)
