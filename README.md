@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/nimzo6689/jCalc/badge.svg?branch=master)](https://coveralls.io/github/nimzo6689/jCalc?branch=master)
 [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/nimzo6689/jCalc/blob/master/LICENSE)
 
-A simple calculator which is created with JavaFX and Maven.
+A simple calculator which is created with JavaFX and Maven. 
 
 ## Overview
 
