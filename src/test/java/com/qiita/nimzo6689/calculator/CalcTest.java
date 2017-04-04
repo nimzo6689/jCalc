@@ -23,11 +23,9 @@
  */
 package com.qiita.nimzo6689.calculator;
 
-import java.lang.reflect.Method;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j2;
 import org.junit.Test;
 import static org.testfx.api.FxAssert.verifyThat;
 import org.testfx.framework.junit.ApplicationTest;
@@ -38,6 +36,7 @@ import static org.testfx.matcher.base.NodeMatchers.hasText;
  *
  * @author nimzo6689
  */
+@Log4j2
 public class CalcTest extends ApplicationTest {
 
     /**
@@ -47,78 +46,121 @@ public class CalcTest extends ApplicationTest {
     @Override
     @SneakyThrows
     public void start(Stage stage) {
-        CalcMain calcMain = new CalcMain();
-        Method method = calcMain.getClass().getDeclaredMethod("getParent");
-        method.setAccessible(true);
-        stage.setScene(new Scene((Parent) method.invoke(calcMain)));
-        stage.show();
+        new Bootstrap().start(stage);
     }
 
-    /**
-     * RegisterA -> Operation -> RegisterB -> Result.
-     */
     @Test
-    public void should_12_plus_4_equal_16() {
-        clickOn("1");
-        clickOn("2");
-        clickOn("#plus");
-        clickOn("4");
-        clickOn("#equal");
-//        verifyThat("#display", hasText("16"));
+    public void test_onInputNumber_in_registerA() {
+        log.debug("test_onInputNumber_in_registerA");
 
-        clickOn("1");
+        clickOn("#zero");
+        clickOn("#zero");
+        verifyThat("#display", hasText("0"));
+
+        clickOn("#zero");
+//        clickOn("#comma");
+//        clickOn("#comma");
+        clickOn("#zero");
+        clickOn("#zero");
+        clickOn("#one");
+//        verifyThat("#display", hasText("0.001"));
         verifyThat("#display", hasText("1"));
 
+        clickOn("#clear");
+        verifyThat("#display", hasText("0"));
+
+        clickOn("#two");
+        clickOn("#three");
+        clickOn("#four");
+        clickOn("#five");
+        clickOn("#six");
+        clickOn("#seven");
+        clickOn("#eight");
+        clickOn("#nine");
+        verifyThat("#display", hasText("23456789"));
+
         clickOn("#sign");
-        verifyThat("#display", hasText("-1"));
+        verifyThat("#display", hasText("-23456789"));
     }
 
-    /**
-     * RegisterA -> Operation -> RegisterB -> Result.
-     */
     @Test
-    public void should_12_minus_4_equal_8() {
-        // given:
-        clickOn("1");
-        clickOn("2");
-        clickOn("#minus");
-        clickOn("4");
+    public void test_cycle_operation_result() {
+        log.debug("test_cycle_operation_result");
+
+        clickOn("#one");
+        clickOn("#plus");
+        clickOn("#two");
         clickOn("#equal");
-
-        // then:
-        verifyThat("#display", hasText("8"));
-    }
-
-    /**
-     * RegisterA -> Operation -> RegisterB -> Result.
-     */
-    @Test
-    public void should_12_times_4_equal_48() {
-        // given:
-        clickOn("1");
-        clickOn("2");
-        clickOn("#times");
-        clickOn("4");
-        clickOn("#equal");
-
-        // then:
-        verifyThat("#display", hasText("48"));
-    }
-
-    /**
-     * RegisterA -> Operation -> RegisterB -> Result.
-     */
-    @Test
-    public void should_12_divide_4_equal_3() {
-        // given:
-        clickOn("1");
-        clickOn("2");
-        clickOn("#divide");
-        clickOn("4");
-        clickOn("#equal");
-
-        // then:
         verifyThat("#display", hasText("3"));
+
+        clickOn("#one");
+        clickOn("#plus");
+        clickOn("#minus");
+        clickOn("#two");
+        clickOn("#equal");
+        verifyThat("#display", hasText("-1"));
+
+        clickOn("#three");
+        clickOn("#times");
+        clickOn("#two");
+        clickOn("#three");
+        clickOn("#equal");
+        verifyThat("#display", hasText("69"));
+
+        clickOn("#nine");
+        clickOn("#divide");
+        clickOn("#two");
+        clickOn("#equal");
+        clickOn("#equal");
+        verifyThat("#display", hasText("4.5"));
+    }
+
+    @Test
+    public void test_cycle_registerA_operation_result() {
+        log.debug("test_cycle_registerA_operation_result");
+
+        // RegisterA -> Operation
+        clickOn("#one");
+        clickOn("#two");
+        clickOn("#plus");
+        verifyThat("#display", hasText("12"));
+
+        // Operation -> RegisterA
+        clickOn("#clear");
+        clickOn("#clear");
+        verifyThat("#display", hasText("0"));
+
+        // RegisterA -> Result
+        clickOn("#equal");
+        verifyThat("#display", hasText("0"));
+
+        // Result -> RegisterA
+        clickOn("#clear");
+        verifyThat("#display", hasText("0"));
+
+        // RegisterA -> Operation -> Result
+//        clickOn("#five");
+//        clickOn("#times");
+//        clickOn("#equal");
+//        verifyThat("#display", hasText("25"));
+        clickOn("#two");
+        clickOn("#five");
+
+        // Result -> Operation -> RegisterB -> Result
+        clickOn("#minus");
+        clickOn("#three");
+        clickOn("#zero");
+        clickOn("#equal");
+        verifyThat("#display", hasText("-5"));
+
+        // Result -> Operation -> RegisterB -> Operation -> Result
+//        clickOn("#plus");
+//        clickOn("#six");
+//        clickOn("#zero");
+//        clickOn("#divide");
+//        clickOn("#one");
+//        clickOn("#one");
+//        verifyThat("#display", hasText("5"));
     }
 
 }

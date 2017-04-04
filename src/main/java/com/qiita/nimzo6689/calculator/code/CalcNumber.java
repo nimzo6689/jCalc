@@ -27,7 +27,6 @@ import javafx.scene.control.TextArea;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 
 /**
  *
@@ -83,6 +82,11 @@ public enum CalcNumber {
     public void appendNumberTo(TextArea textArea) {
         if ("0".equals(textArea.getText())) {
             setNumberTo(textArea);
+            return;
+        }
+        if (textArea.getText().endsWith(COMMA.number)
+                && COMMA.number == number) {
+            // Do nothing.
             return;
         }
         textArea.appendText(number);

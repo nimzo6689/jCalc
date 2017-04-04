@@ -45,51 +45,47 @@ public enum OperationState implements ICalcState {
         @Override
         public void onInputNumber(ActionEvent event, CalcController controller) {
 <span class="fc" id="L47">            CalcNumber calcNumber = Converts.toCalcNumberFrom(event);</span>
-<span class="pc bpc" id="L48" title="1 of 2 branches missed.">            if (CalcNumber.ZERO == calcNumber) {</span>
-<span class="nc" id="L49">                controller.getClear().setText(&quot;C&quot;);</span>
-<span class="nc" id="L50">                controller.getDisplay().setText(&quot;&quot;);</span>
-            }
-<span class="fc" id="L52">            controller.getDisplay().setText(calcNumber.getNumber());</span>
+<span class="fc" id="L48">            controller.getDisplay().setText(calcNumber.getNumber());</span>
 
-<span class="fc" id="L54">            controller.changeCalcStateTo(RegisterBState.INSTANCE);</span>
-<span class="fc" id="L55">        }</span>
+<span class="fc" id="L50">            controller.changeCalcStateTo(RegisterBState.INSTANCE);</span>
+<span class="fc" id="L51">        }</span>
 
         @Override
         public void onInputOperation(ActionEvent event, CalcController controller) {
-<span class="nc" id="L59">            controller.setOperation(Converts.toOperationFrom(event));</span>
-<span class="nc" id="L60">        }</span>
+<span class="fc" id="L55">            controller.setOperation(Converts.toOperationFrom(event));</span>
+<span class="fc" id="L56">        }</span>
 
         @Override
         public void onInputEqual(ActionEvent event, CalcController controller) {
-<span class="nc" id="L64">            Operation operation = Converts.toOperationFrom(event);</span>
+<span class="nc" id="L60">            Operation operation = Converts.toOperationFrom(event);</span>
 
-<span class="nc bnc" id="L66" title="All 4 branches missed.">            if (Operation.PLUS == operation || Operation.MINUS == operation) {</span>
-<span class="nc" id="L67">                controller.getDisplay().setText(controller.getRegisterA().toPlainString());</span>
+<span class="nc bnc" id="L62" title="All 4 branches missed.">            if (Operation.PLUS == operation || Operation.MINUS == operation) {</span>
+<span class="nc" id="L63">                controller.getDisplay().setText(controller.getRegisterA().toPlainString());</span>
             } else {
-<span class="nc" id="L69">                BigDecimal result = operation.eval(controller.getRegisterA(), controller.getRegisterB());</span>
-<span class="nc" id="L70">                controller.getDisplay().setText(result.toPlainString());</span>
-<span class="nc" id="L71">                controller.setRegisterA(result);</span>
-<span class="nc" id="L72">                controller.setRegisterB(BigDecimal.ZERO);</span>
+<span class="nc" id="L65">                BigDecimal result = operation.eval(controller.getRegisterA(), controller.getRegisterB());</span>
+<span class="nc" id="L66">                controller.getDisplay().setText(result.toPlainString());</span>
+<span class="nc" id="L67">                controller.setRegisterA(result);</span>
+<span class="nc" id="L68">                controller.setRegisterB(BigDecimal.ZERO);</span>
             }
 
-<span class="nc" id="L75">            controller.changeCalcStateTo(ResultState.INSTANCE);</span>
-<span class="nc" id="L76">        }</span>
+<span class="nc" id="L71">            controller.changeCalcStateTo(ResultState.INSTANCE);</span>
+<span class="nc" id="L72">        }</span>
 
         @Override
         public void onInputClear(ActionEvent event, CalcController controller) {
-<span class="nc" id="L80">            controller.setRegisterA(BigDecimal.ZERO);</span>
-<span class="nc" id="L81">            controller.getDisplay().setText(CalcController.DEFAULT_VALUE);</span>
+<span class="fc" id="L76">            controller.setRegisterA(BigDecimal.ZERO);</span>
+<span class="fc" id="L77">            controller.getDisplay().setText(CalcController.DEFAULT_VALUE);</span>
 
-<span class="nc" id="L83">            controller.changeCalcStateTo(RegisterAState.INSTANCE);</span>
-<span class="nc" id="L84">        }</span>
+<span class="fc" id="L79">            controller.changeCalcStateTo(RegisterAState.INSTANCE);</span>
+<span class="fc" id="L80">        }</span>
 
         @Override
         public void onInputSign(CalcController controller) {
-<span class="nc" id="L88">            BigDecimal number = new BigDecimal(controller.getDisplay().getText());</span>
-<span class="nc bnc" id="L89" title="All 2 branches missed.">            if (number != BigDecimal.ZERO) {</span>
-<span class="nc" id="L90">                controller.getDisplay().setText(number.negate().toPlainString());</span>
+<span class="nc" id="L84">            BigDecimal number = new BigDecimal(controller.getDisplay().getText());</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">            if (number != BigDecimal.ZERO) {</span>
+<span class="nc" id="L86">                controller.getDisplay().setText(number.negate().toPlainString());</span>
             }
-<span class="nc" id="L92">        }</span>
+<span class="nc" id="L88">        }</span>
     }
 
 }

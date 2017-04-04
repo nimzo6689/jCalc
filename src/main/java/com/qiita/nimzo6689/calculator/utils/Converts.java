@@ -39,7 +39,7 @@ public final class Converts {
 
     /**
      *
-     * @param event
+     * @param event Corresponding to FXML element.
      * @return CalcNumber enum object.
      */
     public static CalcNumber toCalcNumberFrom(ActionEvent event) {
@@ -49,7 +49,7 @@ public final class Converts {
 
     /**
      *
-     * @param event
+     * @param event Corresponding to FXML element.
      * @return Operation enum object.
      */
     public static Operation toOperationFrom(ActionEvent event) {

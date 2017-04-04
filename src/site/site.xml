@@ -15,18 +15,13 @@
             <item name="Project License" href="./license.html" />
             <item name="Project Plugins" href="./plugins.html" />
             <item name="Project Summary" href="./project-summary.html" />
-            <item name="Project Team" href="./team-list.html" />
         </menu>
         
         <menu name="Project Reports">
-            <item collapse="true" name="JavaDocs" href="./apidocs/index.html" />
-            <item collapse="true" name="Source Xref" href="./xref/index.html" />
+            <item name="JavaDocs" href="./apidocs/index.html" />
             <item name="CheckStyle" href="./pmd.html" />
             <item name="FindBugs" href="./findbugs.html" />
             <item name="PMD Report" href="./checkstyle.html" />
-            <item name="Surefire Report" href="./surefire-report.html" />
-            <item name="Jacoco" href="./jacoco/index.html" />
-            <item name="JDepend Report" href="./jdepend-report.html" />
         </menu>
 
         <menu name="Other services" inherit="bottom">

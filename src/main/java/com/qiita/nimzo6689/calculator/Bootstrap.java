@@ -35,7 +35,7 @@ import lombok.SneakyThrows;
  *
  * @author nimzo6689
  */
-public final class CalcMain extends Application {
+public final class Bootstrap extends Application {
 
     public static void main(String[] args) {
         launch(args);

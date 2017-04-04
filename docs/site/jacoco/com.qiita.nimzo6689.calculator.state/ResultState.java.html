@@ -44,46 +44,42 @@ public enum ResultState implements ICalcState {
         @Override
         public void onInputNumber(ActionEvent event, CalcController controller) {
 <span class="fc" id="L46">            CalcNumber calcNumber = Converts.toCalcNumberFrom(event);</span>
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">            if (CalcNumber.ZERO == calcNumber) {</span>
-<span class="nc" id="L48">                controller.getClear().setText(&quot;C&quot;);</span>
-<span class="nc" id="L49">                controller.getDisplay().setText(&quot;&quot;);</span>
-            }
-<span class="fc" id="L51">            calcNumber.setNumberTo(controller.getDisplay());</span>
+<span class="fc" id="L47">            calcNumber.setNumberTo(controller.getDisplay());</span>
 
-<span class="fc" id="L53">            controller.changeCalcStateTo(RegisterAState.INSTANCE);</span>
-<span class="fc" id="L54">        }</span>
+<span class="fc" id="L49">            controller.changeCalcStateTo(RegisterAState.INSTANCE);</span>
+<span class="fc" id="L50">        }</span>
 
         @Override
         public void onInputOperation(ActionEvent event, CalcController controller) {
-<span class="nc" id="L58">            BigDecimal result = controller.getOperation().eval(controller.getRegisterA(), controller.getRegisterB());</span>
-<span class="nc" id="L59">            controller.getDisplay().setText(result.toPlainString());</span>
-<span class="nc" id="L60">            controller.setRegisterA(result);</span>
-<span class="nc" id="L61">            controller.setRegisterB(BigDecimal.ZERO);</span>
+<span class="nc" id="L54">            BigDecimal result = controller.getOperation().eval(controller.getRegisterA(), controller.getRegisterB());</span>
+<span class="nc" id="L55">            controller.getDisplay().setText(result.toPlainString());</span>
+<span class="nc" id="L56">            controller.setRegisterA(result);</span>
+<span class="nc" id="L57">            controller.setRegisterB(BigDecimal.ZERO);</span>
 
-<span class="nc" id="L63">            controller.changeCalcStateTo(OperationState.INSTANCE);</span>
-<span class="nc" id="L64">        }</span>
+<span class="nc" id="L59">            controller.changeCalcStateTo(OperationState.INSTANCE);</span>
+<span class="nc" id="L60">        }</span>
 
         @Override
         public void onInputEqual(ActionEvent event, CalcController controller) {
             // Do nothing.
-<span class="nc" id="L69">        }</span>
+<span class="fc" id="L65">        }</span>
 
         @Override
         public void onInputClear(ActionEvent event, CalcController controller) {
-<span class="nc" id="L73">            controller.setRegisterA(BigDecimal.ZERO);</span>
-<span class="nc" id="L74">            controller.setRegisterB(BigDecimal.ZERO);</span>
-<span class="nc" id="L75">            controller.getDisplay().setText(CalcController.DEFAULT_VALUE);</span>
+<span class="fc" id="L69">            controller.setRegisterA(BigDecimal.ZERO);</span>
+<span class="fc" id="L70">            controller.setRegisterB(BigDecimal.ZERO);</span>
+<span class="fc" id="L71">            controller.getDisplay().setText(CalcController.DEFAULT_VALUE);</span>
 
-<span class="nc" id="L77">            controller.changeCalcStateTo(RegisterAState.INSTANCE);</span>
-<span class="nc" id="L78">        }</span>
+<span class="fc" id="L73">            controller.changeCalcStateTo(RegisterAState.INSTANCE);</span>
+<span class="fc" id="L74">        }</span>
 
         @Override
         public void onInputSign(CalcController controller) {
-<span class="nc" id="L82">            BigDecimal number = new BigDecimal(controller.getDisplay().getText());</span>
-<span class="nc bnc" id="L83" title="All 2 branches missed.">            if (number != BigDecimal.ZERO) {</span>
-<span class="nc" id="L84">                controller.getDisplay().setText(number.negate().toPlainString());</span>
+<span class="nc" id="L78">            BigDecimal number = new BigDecimal(controller.getDisplay().getText());</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">            if (number != BigDecimal.ZERO) {</span>
+<span class="nc" id="L80">                controller.getDisplay().setText(number.negate().toPlainString());</span>
             }
-<span class="nc" id="L86">        }</span>
+<span class="nc" id="L82">        }</span>
     }
 
 }

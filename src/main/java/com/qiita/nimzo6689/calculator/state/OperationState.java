@@ -45,10 +45,6 @@ public enum OperationState implements ICalcState {
         @Override
         public void onInputNumber(ActionEvent event, CalcController controller) {
             CalcNumber calcNumber = Converts.toCalcNumberFrom(event);
-            if (CalcNumber.ZERO == calcNumber) {
-                controller.getClear().setText("C");
-                controller.getDisplay().setText("");
-            }
             controller.getDisplay().setText(calcNumber.getNumber());
 
             controller.changeCalcStateTo(RegisterBState.INSTANCE);
