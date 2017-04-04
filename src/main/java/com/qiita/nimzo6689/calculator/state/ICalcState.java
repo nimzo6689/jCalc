@@ -24,7 +24,7 @@
 package com.qiita.nimzo6689.calculator.state;
 
 import com.qiita.nimzo6689.calculator.CalcController;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 
 /**
  *
@@ -38,7 +38,7 @@ public interface ICalcState {
      * @param event Corresponding to FXML element.
      * @param controller Calculator's controller.
      */
-    public void onInputNumber(Event event, CalcController controller);
+    public void onInputNumber(ActionEvent event, CalcController controller);
 
     /**
      * Event handling for operation.
@@ -46,7 +46,7 @@ public interface ICalcState {
      * @param event Corresponding to FXML element.
      * @param controller Calculator's controller.
      */
-    public void onInputOperation(Event event, CalcController controller);
+    public void onInputOperation(ActionEvent event, CalcController controller);
 
     /**
      * Event handling for "=".
@@ -54,7 +54,7 @@ public interface ICalcState {
      * @param event Corresponding to FXML element.
      * @param controller Calculator's controller.
      */
-    public void onInputEqual(Event event, CalcController controller);
+    public void onInputEqual(ActionEvent event, CalcController controller);
 
     /**
      * Event handling for "C" and "AC".
@@ -62,7 +62,7 @@ public interface ICalcState {
      * @param event Corresponding to FXML element.
      * @param controller Calculator's controller.
      */
-    public void onInputClear(Event event, CalcController controller);
+    public void onInputClear(ActionEvent event, CalcController controller);
 
     /**
      * Event handling for "+/-".

@@ -25,9 +25,9 @@ package com.qiita.nimzo6689.calculator.state;
 
 import com.qiita.nimzo6689.calculator.CalcController;
 import com.qiita.nimzo6689.calculator.code.CalcNumber;
+import com.qiita.nimzo6689.calculator.utils.Converts;
 import java.math.BigDecimal;
-import javafx.event.Event;
-import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -42,20 +42,19 @@ public enum ResultState implements ICalcState {
 
     INSTANCE {
         @Override
-        public void onInputNumber(Event event, CalcController controller) {
-            Button btn = (Button) event.getSource();
-            CalcNumber calcNumber = CalcNumber.of(btn.getId());
+        public void onInputNumber(ActionEvent event, CalcController controller) {
+            CalcNumber calcNumber = Converts.toCalcNumberFrom(event);
             if (CalcNumber.ZERO == calcNumber) {
                 controller.getClear().setText("C");
                 controller.getDisplay().setText("");
             }
-            calcNumber.appendNumberTo(controller.getDisplay());
+            calcNumber.setNumberTo(controller.getDisplay());
 
             controller.changeCalcStateTo(RegisterAState.INSTANCE);
         }
 
         @Override
-        public void onInputOperation(Event event, CalcController controller) {
+        public void onInputOperation(ActionEvent event, CalcController controller) {
             BigDecimal result = controller.getOperation().eval(controller.getRegisterA(), controller.getRegisterB());
             controller.getDisplay().setText(result.toPlainString());
             controller.setRegisterA(result);
@@ -65,12 +64,12 @@ public enum ResultState implements ICalcState {
         }
 
         @Override
-        public void onInputEqual(Event event, CalcController controller) {
+        public void onInputEqual(ActionEvent event, CalcController controller) {
             // Do nothing.
         }
 
         @Override
-        public void onInputClear(Event event, CalcController controller) {
+        public void onInputClear(ActionEvent event, CalcController controller) {
             controller.setRegisterA(BigDecimal.ZERO);
             controller.setRegisterB(BigDecimal.ZERO);
             controller.getDisplay().setText(CalcController.DEFAULT_VALUE);

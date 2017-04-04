@@ -29,7 +29,7 @@ import com.qiita.nimzo6689.calculator.state.RegisterAState;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -101,7 +101,7 @@ public class CalcController implements Initializable {
      * @param event Corresponding to FXML element.
      */
     @FXML
-    private void onInputNumber(Event event) {
+    public void onInputNumber(ActionEvent event) {
         calcState.onInputNumber(event, this);
     }
 
@@ -111,7 +111,7 @@ public class CalcController implements Initializable {
      * @param event Corresponding to FXML element.
      */
     @FXML
-    private void onInputOperation(Event event) {
+    public void onInputOperation(ActionEvent event) {
         calcState.onInputOperation(event, this);
     }
 
@@ -121,7 +121,7 @@ public class CalcController implements Initializable {
      * @param event Corresponding to FXML element.
      */
     @FXML
-    private void onInputEqual(Event event) {
+    public void onInputEqual(ActionEvent event) {
         calcState.onInputEqual(event, this);
     }
 
@@ -131,7 +131,7 @@ public class CalcController implements Initializable {
      * @param event Corresponding to FXML element.
      */
     @FXML
-    private void onInputClear(Event event) {
+    public void onInputClear(ActionEvent event) {
         calcState.onInputClear(event, this);
     }
 
@@ -139,7 +139,7 @@ public class CalcController implements Initializable {
      * On input "+/-", delegate ICalcState instance.
      */
     @FXML
-    private void onInputSign() {
+    public void onInputSign() {
         calcState.onInputSign(this);
     }
 

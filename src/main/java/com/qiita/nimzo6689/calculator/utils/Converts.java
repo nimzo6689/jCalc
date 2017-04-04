@@ -21,35 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.qiita.nimzo6689.calculator;
+package com.qiita.nimzo6689.calculator.utils;
 
-import java.io.IOException;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import lombok.SneakyThrows;
+import com.qiita.nimzo6689.calculator.code.CalcNumber;
+import com.qiita.nimzo6689.calculator.code.Operation;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author nimzo6689
  */
-public final class CalcMain extends Application {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class Converts {
 
-    public static void main(String[] args) {
-        launch(args);
+    /**
+     *
+     * @param event
+     * @return CalcNumber enum object.
+     */
+    public static CalcNumber toCalcNumberFrom(ActionEvent event) {
+        Button btn = (Button) event.getSource();
+        return CalcNumber.of(btn.getId());
     }
 
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setScene(new Scene(getParent()));
-        primaryStage.show();
-    }
-
-    @SneakyThrows(IOException.class)
-    private Parent getParent() {
-        return FXMLLoader.load(getClass().getResource("mainView.fxml"));
+    /**
+     *
+     * @param event
+     * @return Operation enum object.
+     */
+    public static Operation toOperationFrom(ActionEvent event) {
+        Button btn = (Button) event.getSource();
+        return Operation.of(btn.getId());
     }
 
 }

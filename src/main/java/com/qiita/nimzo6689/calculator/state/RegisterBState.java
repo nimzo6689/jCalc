@@ -25,10 +25,9 @@ package com.qiita.nimzo6689.calculator.state;
 
 import com.qiita.nimzo6689.calculator.CalcController;
 import com.qiita.nimzo6689.calculator.code.CalcNumber;
-import com.qiita.nimzo6689.calculator.code.Operation;
+import com.qiita.nimzo6689.calculator.utils.Converts;
 import java.math.BigDecimal;
-import javafx.event.Event;
-import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -43,9 +42,8 @@ public enum RegisterBState implements ICalcState {
 
     INSTANCE {
         @Override
-        public void onInputNumber(Event event, CalcController controller) {
-            Button btn = (Button) event.getSource();
-            CalcNumber calcNumber = CalcNumber.of(btn.getId());
+        public void onInputNumber(ActionEvent event, CalcController controller) {
+            CalcNumber calcNumber = Converts.toCalcNumberFrom(event);
             if (CalcNumber.ZERO == calcNumber) {
                 controller.getClear().setText("C");
                 controller.getDisplay().setText("");
@@ -54,21 +52,19 @@ public enum RegisterBState implements ICalcState {
         }
 
         @Override
-        public void onInputOperation(Event event, CalcController controller) {
+        public void onInputOperation(ActionEvent event, CalcController controller) {
             BigDecimal registerB = new BigDecimal(controller.getDisplay().getText());
             controller.setRegisterB(registerB);
             BigDecimal result = controller.getOperation().eval(controller.getRegisterA(), registerB);
             controller.getDisplay().setText(result.toPlainString());
             controller.setRegisterA(result);
-
-            Button btn = (Button) event.getSource();
-            controller.setOperation(Operation.of(btn.getId()));
+            controller.setOperation(Converts.toOperationFrom(event));
 
             controller.changeCalcStateTo(OperationState.INSTANCE);
         }
 
         @Override
-        public void onInputEqual(Event event, CalcController controller) {
+        public void onInputEqual(ActionEvent event, CalcController controller) {
             BigDecimal result = controller.getOperation()
                     .eval(controller.getRegisterA(), new BigDecimal(controller.getDisplay().getText()));
             controller.getDisplay().setText(result.toPlainString());
@@ -79,7 +75,7 @@ public enum RegisterBState implements ICalcState {
         }
 
         @Override
-        public void onInputClear(Event event, CalcController controller) {
+        public void onInputClear(ActionEvent event, CalcController controller) {
             controller.setRegisterB(BigDecimal.ZERO);
             controller.getDisplay().setText(CalcController.DEFAULT_VALUE);
         }

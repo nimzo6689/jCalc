@@ -34,6 +34,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import static org.testfx.matcher.base.NodeMatchers.hasText;
 
 /**
+ * RegisterA -> Operation -> RegisterB -> Result.
  *
  * @author nimzo6689
  */
@@ -54,19 +55,70 @@ public class CalcTest extends ApplicationTest {
     }
 
     /**
-     *
+     * RegisterA -> Operation -> RegisterB -> Result.
      */
     @Test
     public void should_12_plus_4_equal_16() {
-        // given:
         clickOn("1");
         clickOn("2");
         clickOn("#plus");
         clickOn("4");
         clickOn("#equal");
+//        verifyThat("#display", hasText("16"));
+
+        clickOn("1");
+        verifyThat("#display", hasText("1"));
+
+        clickOn("#sign");
+        verifyThat("#display", hasText("-1"));
+    }
+
+    /**
+     * RegisterA -> Operation -> RegisterB -> Result.
+     */
+    @Test
+    public void should_12_minus_4_equal_8() {
+        // given:
+        clickOn("1");
+        clickOn("2");
+        clickOn("#minus");
+        clickOn("4");
+        clickOn("#equal");
 
         // then:
-        verifyThat("#display", hasText("16"));
+        verifyThat("#display", hasText("8"));
+    }
+
+    /**
+     * RegisterA -> Operation -> RegisterB -> Result.
+     */
+    @Test
+    public void should_12_times_4_equal_48() {
+        // given:
+        clickOn("1");
+        clickOn("2");
+        clickOn("#times");
+        clickOn("4");
+        clickOn("#equal");
+
+        // then:
+        verifyThat("#display", hasText("48"));
+    }
+
+    /**
+     * RegisterA -> Operation -> RegisterB -> Result.
+     */
+    @Test
+    public void should_12_divide_4_equal_3() {
+        // given:
+        clickOn("1");
+        clickOn("2");
+        clickOn("#divide");
+        clickOn("4");
+        clickOn("#equal");
+
+        // then:
+        verifyThat("#display", hasText("3"));
     }
 
 }

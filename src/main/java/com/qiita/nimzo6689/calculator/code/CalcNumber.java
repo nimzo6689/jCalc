@@ -27,6 +27,7 @@ import javafx.scene.control.TextArea;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 
 /**
  *
@@ -71,7 +72,19 @@ public enum CalcNumber {
      *
      * @param textArea display object in FXML.
      */
+    public void setNumberTo(TextArea textArea) {
+        textArea.setText(number);
+    }
+
+    /**
+     *
+     * @param textArea display object in FXML.
+     */
     public void appendNumberTo(TextArea textArea) {
+        if ("0".equals(textArea.getText())) {
+            setNumberTo(textArea);
+            return;
+        }
         textArea.appendText(number);
     }
 

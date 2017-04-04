@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalcController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jCalc</a> &gt; <a href="index.source.html" class="el_package">com.qiita.nimzo6689.calculator</a> &gt; <span class="el_source">CalcController.java</span></div><h1>CalcController.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalcController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jCalc</a> &gt; <a href="index.source.html" class="el_package">com.qiita.nimzo6689.calculator</a> &gt; <span class="el_source">CalcController.java</span></div><h1>CalcController.java</h1><pre class="source lang-java linenums">/*
  * The MIT License
  *
  * Copyright 2017 nimzo6689.
@@ -29,7 +29,7 @@ import com.qiita.nimzo6689.calculator.state.RegisterAState;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -101,7 +101,7 @@ import lombok.extern.log4j.Log4j2;
      * @param event Corresponding to FXML element.
      */
     @FXML
-    private void onInputNumber(Event event) {
+    public void onInputNumber(ActionEvent event) {
 <span class="fc" id="L105">        calcState.onInputNumber(event, this);</span>
 <span class="fc" id="L106">    }</span>
 
@@ -111,7 +111,7 @@ import lombok.extern.log4j.Log4j2;
      * @param event Corresponding to FXML element.
      */
     @FXML
-    private void onInputOperation(Event event) {
+    public void onInputOperation(ActionEvent event) {
 <span class="fc" id="L115">        calcState.onInputOperation(event, this);</span>
 <span class="fc" id="L116">    }</span>
 
@@ -121,7 +121,7 @@ import lombok.extern.log4j.Log4j2;
      * @param event Corresponding to FXML element.
      */
     @FXML
-    private void onInputEqual(Event event) {
+    public void onInputEqual(ActionEvent event) {
 <span class="fc" id="L125">        calcState.onInputEqual(event, this);</span>
 <span class="fc" id="L126">    }</span>
 
@@ -131,7 +131,7 @@ import lombok.extern.log4j.Log4j2;
      * @param event Corresponding to FXML element.
      */
     @FXML
-    private void onInputClear(Event event) {
+    public void onInputClear(ActionEvent event) {
 <span class="nc" id="L135">        calcState.onInputClear(event, this);</span>
 <span class="nc" id="L136">    }</span>
 
@@ -139,9 +139,9 @@ import lombok.extern.log4j.Log4j2;
      * On input &quot;+/-&quot;, delegate ICalcState instance.
      */
     @FXML
-    private void onInputSign() {
-<span class="nc" id="L143">        calcState.onInputSign(this);</span>
-<span class="nc" id="L144">    }</span>
+    public void onInputSign() {
+<span class="fc" id="L143">        calcState.onInputSign(this);</span>
+<span class="fc" id="L144">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
