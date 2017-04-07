@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public enum Operation {
+public enum Operator {
     PLUS("plus") {
         public BigDecimal eval(BigDecimal x, BigDecimal y) {
             return x.add(y);
@@ -56,22 +56,22 @@ public enum Operation {
     /**
      *
      * @param value operator type. plus, minus, times or divide.
-     * @return Operation enum object.
+     * @return Operator enum object.
      */
-    public static Operation of(String value) {
-        for (Operation operation : Operation.values()) {
-            if (operation.value.equals(value)) {
-                return operation;
+    public static Operator of(String value) {
+        for (Operator operator : Operator.values()) {
+            if (operator.value.equals(value)) {
+                return operator;
             }
         }
         throw new IllegalArgumentException(
-                "Type:" + value + " is not a valid " + Operation.class.getName() + " value.");
+                "Type:" + value + " is not a valid " + Operator.class.getName() + " value.");
     }
 
     private final String value;
 
     /**
-     * Evaluate for each operation.
+     * Evaluate for each operator.
      *
      * @param x left operator.
      * @param y right operator.

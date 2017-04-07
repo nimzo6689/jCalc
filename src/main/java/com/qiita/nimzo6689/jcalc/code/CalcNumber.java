@@ -23,6 +23,7 @@
  */
 package com.qiita.nimzo6689.jcalc.code;
 
+import java.math.BigDecimal;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -66,13 +67,13 @@ public enum CalcNumber {
     private final String value;
     private final String number;
 
-    public String getNumberTo(String value) {
-        return number;
+    public BigDecimal toBicDecimal() {
+        return new BigDecimal(number);
     }
 
     public String appendNumberTo(String value) {
         if ("0".equals(value)) {
-            return getNumberTo(value);
+            return number;
         }
         if (value.endsWith(COMMA.number)
                 && COMMA.number == number) {

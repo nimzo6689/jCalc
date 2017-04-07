@@ -23,9 +23,9 @@
  */
 package com.qiita.nimzo6689.jcalc;
 
-import com.qiita.nimzo6689.jcalc.code.Operation;
+import com.qiita.nimzo6689.jcalc.code.Operator;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Objects;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -40,12 +40,14 @@ import lombok.ToString;
 @ToString
 public class CalcModel {
 
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,###,###,###,##0.############");
+
     private StringProperty displayProperty = null;
-    private String value;
+    private String display;
 
     @Getter
     @Setter
-    private Operation operation;
+    private Operator operator;
     @Getter
     @Setter
     private BigDecimal registerA;
@@ -60,20 +62,23 @@ public class CalcModel {
         return displayProperty;
     }
 
-    public String getValue() {
+    public String getDisplay() {
         if (Objects.nonNull(displayProperty)) {
-            return displayProperty.get();
+            return displayProperty.get().replaceAll(",", "");
         }
-        return value;
+        return display;
     }
 
-    public void setValue(String value) {
-        if (Objects.nonNull(displayProperty)) {
-            displayProperty.set(value);
-        } else {
-            this.value = value;
-        }
+    public BigDecimal getDisplayToBicDecimal() {
+        return new BigDecimal(getDisplay());
+    }
 
+    public void setDisplayFromBicDecimal(BigDecimal display) {
+        if (Objects.nonNull(displayProperty)) {
+            displayProperty.set(DECIMAL_FORMAT.format(display));
+        } else {
+            this.display = DECIMAL_FORMAT.format(display);
+        }
     }
 
 }

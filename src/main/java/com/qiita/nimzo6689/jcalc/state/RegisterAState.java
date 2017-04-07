@@ -26,7 +26,7 @@ package com.qiita.nimzo6689.jcalc.state;
 import com.qiita.nimzo6689.jcalc.CalcContext;
 import com.qiita.nimzo6689.jcalc.CalcModel;
 import com.qiita.nimzo6689.jcalc.code.CalcNumber;
-import com.qiita.nimzo6689.jcalc.code.Operation;
+import com.qiita.nimzo6689.jcalc.code.Operator;
 import java.math.BigDecimal;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -43,15 +43,15 @@ public enum RegisterAState implements ICalcState {
     INSTANCE {
         @Override
         public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model) {
-            model.setValue(number.appendNumberTo(model.getValue()));
+            model.setDisplayFromBicDecimal(new BigDecimal(number.appendNumberTo(model.getDisplay())));
         }
 
         @Override
-        public void onInputOperation(CalcContext context, Operation operation, CalcModel model) {
-            model.setRegisterA(new BigDecimal(model.getValue()));
-            model.setOperation(operation);
+        public void onInputOperator(CalcContext context, Operator operator, CalcModel model) {
+            model.setRegisterA(model.getDisplayToBicDecimal());
+            model.setOperator(operator);
 
-            context.changeCalcStateTo(OperationState.INSTANCE);
+            context.changeCalcStateTo(OperatorState.INSTANCE);
         }
 
         @Override
@@ -62,14 +62,14 @@ public enum RegisterAState implements ICalcState {
         @Override
         public void onInputClear(CalcContext context, CalcModel model) {
             model.setRegisterA(BigDecimal.ZERO);
-            model.setValue(CalcNumber.ZERO.getNumber());
+            model.setDisplayFromBicDecimal(CalcNumber.ZERO.toBicDecimal());
         }
 
         @Override
         public void onInputSign(CalcModel model) {
-            BigDecimal number = new BigDecimal(model.getValue());
+            BigDecimal number = model.getDisplayToBicDecimal();
             if (number != BigDecimal.ZERO) {
-                model.setValue(number.negate().toPlainString());
+                model.setDisplayFromBicDecimal(number.negate());
             }
         }
     }

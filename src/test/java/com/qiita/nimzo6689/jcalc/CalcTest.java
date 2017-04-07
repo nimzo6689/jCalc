@@ -77,10 +77,10 @@ public class CalcTest extends ApplicationTest {
         clickOn("#seven");
         clickOn("#eight");
         clickOn("#nine");
-        verifyThat("#display", hasText("23456789"));
+        verifyThat("#display", hasText("23,456,789"));
 
         clickOn("#sign");
-        verifyThat("#display", hasText("-23456789"));
+        verifyThat("#display", hasText("-23,456,789"));
     }
 
     @Test
@@ -107,12 +107,12 @@ public class CalcTest extends ApplicationTest {
         clickOn("#equal");
         verifyThat("#display", hasText("69"));
 
-//        clickOn("#nine");
-//        clickOn("#divide");
-//        clickOn("#two");
-//        clickOn("#equal");
-//        clickOn("#equal");
-//        verifyThat("#display", hasText("4.5"));
+        clickOn("#nine");
+        clickOn("#divide");
+        clickOn("#two");
+        clickOn("#equal");
+        clickOn("#equal");
+        verifyThat("#display", hasText("4.5"));
     }
 
     @Test
@@ -146,13 +146,12 @@ public class CalcTest extends ApplicationTest {
         clickOn("#two");
         clickOn("#five");
 
-        // Result -> Operation -> RegisterB -> Result
-//        clickOn("#minus");
-//        clickOn("#three");
-//        clickOn("#zero");
-//        clickOn("#equal");
-//        verifyThat("#display", hasText("-5"));
-
+        // Result -> Operation -> RegisterB -> Result 
+        clickOn("#minus");
+        clickOn("#three");
+        clickOn("#zero");
+        clickOn("#equal");
+        verifyThat("#display", hasText("-5"));
         // Result -> Operation -> RegisterB -> Operation -> Result
 //        clickOn("#plus");
 //        clickOn("#six");

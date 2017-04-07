@@ -26,7 +26,7 @@ package com.qiita.nimzo6689.jcalc.state;
 import com.qiita.nimzo6689.jcalc.CalcContext;
 import com.qiita.nimzo6689.jcalc.CalcModel;
 import com.qiita.nimzo6689.jcalc.code.CalcNumber;
-import com.qiita.nimzo6689.jcalc.code.Operation;
+import com.qiita.nimzo6689.jcalc.code.Operator;
 import java.math.BigDecimal;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -38,30 +38,30 @@ import lombok.ToString;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
-public enum OperationState implements ICalcState {
+public enum OperatorState implements ICalcState {
 
     INSTANCE {
         @Override
         public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model) {
-            model.setValue(number.getNumber());
+            model.setDisplayFromBicDecimal(number.toBicDecimal());
 
             context.changeCalcStateTo(RegisterBState.INSTANCE);
         }
 
         @Override
-        public void onInputOperation(CalcContext context, Operation operation, CalcModel model) {
-            model.setOperation(operation);
+        public void onInputOperator(CalcContext context, Operator operator, CalcModel model) {
+            model.setOperator(operator);
         }
 
         @Override
         public void onInputEqual(CalcContext context, CalcModel model) {
-            Operation operation = model.getOperation();
+            Operator operation = model.getOperator();
 
-            if (Operation.PLUS == operation || Operation.MINUS == operation) {
-                model.setValue(model.getRegisterA().toPlainString());
+            if (Operator.PLUS == operation || Operator.MINUS == operation) {
+                model.setDisplayFromBicDecimal(model.getRegisterA());
             } else {
                 BigDecimal result = operation.eval(model.getRegisterA(), model.getRegisterB());
-                model.setValue(result.toPlainString());
+                model.setDisplayFromBicDecimal(result);
                 model.setRegisterA(result);
                 model.setRegisterB(BigDecimal.ZERO);
             }
@@ -72,16 +72,16 @@ public enum OperationState implements ICalcState {
         @Override
         public void onInputClear(CalcContext context, CalcModel model) {
             model.setRegisterA(BigDecimal.ZERO);
-            model.setValue(CalcNumber.ZERO.getNumber());
+            model.setDisplayFromBicDecimal(CalcNumber.ZERO.toBicDecimal());
 
             context.changeCalcStateTo(RegisterAState.INSTANCE);
         }
 
         @Override
         public void onInputSign(CalcModel model) {
-            BigDecimal number = new BigDecimal(model.getValue());
+            BigDecimal number = model.getDisplayToBicDecimal();
             if (number != BigDecimal.ZERO) {
-                model.setValue(number.negate().toPlainString());
+                model.setDisplayFromBicDecimal(number.negate());
             }
         }
     }

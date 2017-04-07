@@ -24,7 +24,7 @@
 package com.qiita.nimzo6689.jcalc.utils;
 
 import com.qiita.nimzo6689.jcalc.code.CalcNumber;
-import com.qiita.nimzo6689.jcalc.code.Operation;
+import com.qiita.nimzo6689.jcalc.code.Operator;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import lombok.AccessLevel;
@@ -50,11 +50,11 @@ public final class Converts {
     /**
      *
      * @param event Corresponding to FXML element.
-     * @return Operation enum object.
+     * @return Operator enum object.
      */
-    public static Operation toOperationFrom(ActionEvent event) {
+    public static Operator toOperationFrom(ActionEvent event) {
         Button btn = (Button) event.getSource();
-        return Operation.of(btn.getId());
+        return Operator.of(btn.getId());
     }
 
 }

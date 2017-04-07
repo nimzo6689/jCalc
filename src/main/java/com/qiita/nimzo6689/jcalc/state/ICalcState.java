@@ -26,7 +26,7 @@ package com.qiita.nimzo6689.jcalc.state;
 import com.qiita.nimzo6689.jcalc.CalcContext;
 import com.qiita.nimzo6689.jcalc.CalcModel;
 import com.qiita.nimzo6689.jcalc.code.CalcNumber;
-import com.qiita.nimzo6689.jcalc.code.Operation;
+import com.qiita.nimzo6689.jcalc.code.Operator;
 
 /**
  *
@@ -44,13 +44,13 @@ public interface ICalcState {
     public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model);
 
     /**
-     * Event handling for operation.
+     * Event handling for operator.
      *
      * @param context CalcContext object.
-     * @param operation Operation type.
+     * @param operator Operator type.
      * @param model CalcModel object.
      */
-    public void onInputOperation(CalcContext context, Operation operation, CalcModel model);
+    public void onInputOperator(CalcContext context, Operator operator, CalcModel model);
 
     /**
      * Event handling for "=".

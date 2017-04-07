@@ -31,6 +31,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
+import javafx.util.StringConverter;
 import lombok.extern.log4j.Log4j2;
 
 /**
@@ -59,7 +60,7 @@ public class CalcController implements Initializable {
         display.setEditable(false);
 
         // Bind property for display.
-        display.textProperty().bindBidirectional(model.displayProperty());
+        display.textProperty().bind(model.displayProperty());
         // Set default state.
         context.changeCalcStateTo(RegisterAState.INSTANCE);
     }
@@ -76,13 +77,13 @@ public class CalcController implements Initializable {
     }
 
     /**
-     * On input Operation, delegate ICalcState instance.
+     * On input Operator, delegate ICalcState instance.
      *
      * @param event Corresponding to FXML element.
      */
     @FXML
     public void onInputOperation(ActionEvent event) {
-        context.getState().onInputOperation(
+        context.getState().onInputOperator(
                 context, Converts.toOperationFrom(event), model);
     }
 
