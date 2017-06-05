@@ -79,6 +79,31 @@ public enum ResultState implements ICalcState {
                 model.setDisplayFromBicDecimal(number.negate());
             }
         }
+    };
+    
+    @Override
+    public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model) {
+        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputNumber(context, number, model)");
+    }
+
+    @Override
+    public void onInputOperator(CalcContext context, Operator operator, CalcModel model) {
+        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputOperator(context, operator, model)");
+    }
+
+    @Override
+    public void onInputEqual(CalcContext context, CalcModel model) {
+        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputEqual(context, model)");
+    }
+
+    @Override
+    public void onInputClear(CalcContext context, CalcModel model) {
+        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputClear(context, model)");
+    }
+
+    @Override
+    public void onInputSign(CalcModel model) {
+        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputClear(model)");
     }
 
 }

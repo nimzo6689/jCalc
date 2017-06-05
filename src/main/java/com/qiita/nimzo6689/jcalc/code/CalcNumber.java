@@ -76,7 +76,7 @@ public enum CalcNumber {
             return number;
         }
         if (value.endsWith(COMMA.number)
-                && COMMA.number == number) {
+                && COMMA.number.equals(number)) {
             // Do nothing.
             return value;
         }

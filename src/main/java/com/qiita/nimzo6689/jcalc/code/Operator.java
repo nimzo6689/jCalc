@@ -33,21 +33,25 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum Operator {
     PLUS("plus") {
+        @Override
         public BigDecimal eval(BigDecimal x, BigDecimal y) {
             return x.add(y);
         }
     },
     MINUS("minus") {
+        @Override
         public BigDecimal eval(BigDecimal x, BigDecimal y) {
             return x.subtract(y);
         }
     },
     TIMES("times") {
+        @Override
         public BigDecimal eval(BigDecimal x, BigDecimal y) {
             return x.multiply(y);
         }
     },
     DIVIDE("divide") {
+        @Override
         public BigDecimal eval(BigDecimal x, BigDecimal y) {
             return x.divide(y, 10, RoundingMode.FLOOR);
         }

@@ -31,7 +31,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
-import javafx.util.StringConverter;
 import lombok.extern.log4j.Log4j2;
 
 /**
