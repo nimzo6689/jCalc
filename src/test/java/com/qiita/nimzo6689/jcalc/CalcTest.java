@@ -59,15 +59,14 @@ public class CalcTest extends ApplicationTest {
         clickOn("#zero");
         verifyThat("#display", hasText("0"));
 
-        log.debug("double-zero, double-comma");
+        log.debug("double-zero, double-point");
         clickOn("#zero");
-//        clickOn("#comma");
-//        clickOn("#comma");
+        clickOn("#point");
+        clickOn("#point");
         clickOn("#zero");
         clickOn("#zero");
         clickOn("#one");
-//        verifyThat("#display", hasText("0.001"));
-        verifyThat("#display", hasText("1"));
+        verifyThat("#display", hasText("0.001"));
 
         log.debug("clear");
         clickOn("#clear");
@@ -147,12 +146,10 @@ public class CalcTest extends ApplicationTest {
         verifyThat("#display", hasText("0"));
 
         // RegisterA -> Operator -> Result
-//        clickOn("#five");
-//        clickOn("#times");
-//        clickOn("#equal");
-//        verifyThat("#display", hasText("25"));
-        clickOn("#two");
         clickOn("#five");
+        clickOn("#times");
+        clickOn("#equal");
+        verifyThat("#display", hasText("25"));
 
         // Result -> Operator -> RegisterB -> Result 
         clickOn("#minus");
@@ -160,14 +157,35 @@ public class CalcTest extends ApplicationTest {
         clickOn("#zero");
         clickOn("#equal");
         verifyThat("#display", hasText("-5"));
+
+        // Result -> Operator -> RegisterB -> Result
+        clickOn("#plus");
+        clickOn("#three");
+        clickOn("#sign");
+        clickOn("#equal");
+        verifyThat("#display", hasText("-8"));
+
+        // Result -> Operator -> RegisterB
+        clickOn("#plus");
+        clickOn("#three");
+        clickOn("#clear");
+        verifyThat("#display", hasText("0"));
+
+        clickOn("#equal");
+        clickOn("#clear");
+        clickOn("#five");
+        clickOn("#sign");
+        clickOn("#equal");
+
         // Result -> Operator -> RegisterB -> Operator -> Result
-//        clickOn("#plus");
-//        clickOn("#six");
-//        clickOn("#zero");
-//        clickOn("#divide");
-//        clickOn("#one");
-//        clickOn("#one");
-//        verifyThat("#display", hasText("5"));
+        clickOn("#plus");
+        clickOn("#six");
+        clickOn("#zero");
+        clickOn("#divide");
+        clickOn("#one");
+        clickOn("#one");
+        clickOn("#equal");
+        verifyThat("#display", hasText("5"));
     }
 
 }

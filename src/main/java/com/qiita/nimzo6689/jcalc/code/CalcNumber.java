@@ -36,7 +36,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum CalcNumber {
 
-    COMMA("comma", "."),
+    POINT("point", "."),
     ZERO("zero", "0"),
     DOUBLE_ZERO("double_zero", "00"),
     ONE("one", "1"),
@@ -56,7 +56,7 @@ public enum CalcNumber {
      */
     public static CalcNumber of(String value) {
         for (CalcNumber calcNumber : CalcNumber.values()) {
-            if (calcNumber.value.equals(value)) {
+            if (calcNumber.id.equals(value)) {
                 return calcNumber;
             }
         }
@@ -64,20 +64,28 @@ public enum CalcNumber {
                 "Type:" + value + " is not a valid " + CalcNumber.class.getName() + " value.");
     }
 
-    private final String value;
+    private final String id;
     private final String number;
 
     public BigDecimal toBicDecimal() {
         return new BigDecimal(number);
     }
 
+    /**
+     *
+     * @param value Number on display.
+     * @return New number on display.
+     */
     public String appendNumberTo(String value) {
         if ("0".equals(value)) {
+            // Overwrite number with input id.
+            if (CalcNumber.POINT.id.equals(id)) {
+                return "0.";
+            }
             return number;
         }
-        if (value.endsWith(COMMA.number)
-                && COMMA.number.equals(number)) {
-            // Do nothing.
+        if (POINT.number.equals(number) && value.contains(POINT.number)) {
+            // Avoid displaying double-point.
             return value;
         }
         return value + number;

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RegisterAState.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jCalc</a> &gt; <a href="index.source.html" class="el_package">com.qiita.nimzo6689.jcalc.state</a> &gt; <span class="el_source">RegisterAState.java</span></div><h1>RegisterAState.java</h1><pre class="source lang-java linenums">/*
+ * The MIT License
+ *
+ * Copyright 2017 nimzo6689.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the &quot;Software&quot;), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+package com.qiita.nimzo6689.jcalc.state;
+
+import com.qiita.nimzo6689.jcalc.CalcContext;
+import com.qiita.nimzo6689.jcalc.CalcModel;
+import com.qiita.nimzo6689.jcalc.code.CalcNumber;
+import com.qiita.nimzo6689.jcalc.code.Operator;
+import java.math.BigDecimal;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+/**
+ *
+ * @author nimzo6689
+ */
+<span class="fc" id="L39">@NoArgsConstructor(access = AccessLevel.PRIVATE)</span>
+<span class="fc" id="L40">@ToString</span>
+public class RegisterAState implements ICalcState {
+
+<span class="fc" id="L43">    private static final RegisterAState INSTANCE = new RegisterAState();</span>
+
+    public static RegisterAState getInstance() {
+<span class="fc" id="L46">        return INSTANCE;</span>
+    }
+
+    @Override
+    public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model) {
+<span class="fc" id="L51">        model.setDisplay(number.appendNumberTo(model.getDisplay()));</span>
+<span class="fc" id="L52">    }</span>
+
+    @Override
+    public void onInputOperator(CalcContext context, Operator operator, CalcModel model) {
+<span class="fc" id="L56">        model.setRegisterA(model.getDisplayToBicDecimal());</span>
+<span class="fc" id="L57">        model.setOperator(operator);</span>
+
+<span class="fc" id="L59">        context.changeCalcStateTo(OperatorState.getInstance());</span>
+<span class="fc" id="L60">    }</span>
+
+    @Override
+    public void onInputEqual(CalcContext context, CalcModel model) {
+<span class="fc" id="L64">        context.changeCalcStateTo(ResultState.getInstance());</span>
+<span class="fc" id="L65">    }</span>
+
+    @Override
+    public void onInputClear(CalcContext context, CalcModel model) {
+<span class="fc" id="L69">        model.setRegisterA(BigDecimal.ZERO);</span>
+<span class="fc" id="L70">        model.setDisplay(CalcNumber.ZERO.getNumber());</span>
+<span class="fc" id="L71">    }</span>
+
+    @Override
+    public void onInputSign(CalcModel model) {
+<span class="fc" id="L75">        BigDecimal number = model.getDisplayToBicDecimal();</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (number != BigDecimal.ZERO) {</span>
+<span class="fc" id="L77">            model.setDisplay(number.negate().toPlainString());</span>
+        }
+<span class="fc" id="L79">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

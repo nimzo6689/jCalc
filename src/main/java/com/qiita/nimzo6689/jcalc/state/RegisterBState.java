@@ -23,6 +23,7 @@
  */
 package com.qiita.nimzo6689.jcalc.state;
 
+import com.qiita.nimzo6689.jcalc.CalcConstants;
 import com.qiita.nimzo6689.jcalc.CalcContext;
 import com.qiita.nimzo6689.jcalc.CalcModel;
 import com.qiita.nimzo6689.jcalc.code.CalcNumber;
@@ -48,7 +49,7 @@ public class RegisterBState implements ICalcState {
 
     @Override
     public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model) {
-        model.setDisplay(new BigDecimal(number.appendNumberTo(model.getDisplay())));
+        model.setDisplay(number.appendNumberTo(model.getDisplay()));
     }
 
     @Override
@@ -56,7 +57,7 @@ public class RegisterBState implements ICalcState {
         BigDecimal registerB = model.getDisplayToBicDecimal();
         model.setRegisterB(registerB);
         BigDecimal result = model.getOperator().eval(model.getRegisterA(), registerB);
-        model.setDisplay(result);
+        model.setDisplay(result.toPlainString());
         model.setRegisterA(result);
         model.setOperator(operator);
 
@@ -67,7 +68,7 @@ public class RegisterBState implements ICalcState {
     public void onInputEqual(CalcContext context, CalcModel model) {
         BigDecimal result = model.getOperator()
                 .eval(model.getRegisterA(), model.getDisplayToBicDecimal());
-        model.setDisplay(result);
+        model.setDisplay(CalcConstants.DECIMAL_FORMAT.format(result));
         model.setRegisterA(result);
         model.setRegisterB(BigDecimal.ZERO);
 
@@ -77,14 +78,14 @@ public class RegisterBState implements ICalcState {
     @Override
     public void onInputClear(CalcContext context, CalcModel model) {
         model.setRegisterB(BigDecimal.ZERO);
-        model.setDisplay(CalcNumber.ZERO.toBicDecimal());
+        model.setDisplay(CalcNumber.ZERO.getNumber());
     }
 
     @Override
     public void onInputSign(CalcModel model) {
         BigDecimal number = model.getDisplayToBicDecimal();
         if (number != BigDecimal.ZERO) {
-            model.setDisplay(number.negate());
+            model.setDisplay(number.negate().toPlainString());
         }
     }
 }

@@ -48,7 +48,7 @@ public class OperatorState implements ICalcState {
 
     @Override
     public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model) {
-        model.setDisplay(number.toBicDecimal());
+        model.setDisplay(number.getNumber());
 
         context.changeCalcStateTo(RegisterBState.getInstance());
     }
@@ -63,10 +63,10 @@ public class OperatorState implements ICalcState {
         Operator operator = model.getOperator();
 
         if (Operator.PLUS == operator || Operator.MINUS == operator) {
-            model.setDisplay(model.getRegisterA());
+            model.setDisplay(model.getRegisterA().toPlainString());
         } else {
-            BigDecimal result = operator.eval(model.getRegisterA(), model.getRegisterB());
-            model.setDisplay(result);
+            BigDecimal result = operator.eval(model.getRegisterA(), model.getRegisterA());
+            model.setDisplay(result.toPlainString());
             model.setRegisterA(result);
             model.setRegisterB(BigDecimal.ZERO);
         }
@@ -77,7 +77,7 @@ public class OperatorState implements ICalcState {
     @Override
     public void onInputClear(CalcContext context, CalcModel model) {
         model.setRegisterA(BigDecimal.ZERO);
-        model.setDisplay(CalcNumber.ZERO.toBicDecimal());
+        model.setDisplay(CalcNumber.ZERO.getNumber());
 
         context.changeCalcStateTo(RegisterAState.getInstance());
     }
@@ -86,7 +86,7 @@ public class OperatorState implements ICalcState {
     public void onInputSign(CalcModel model) {
         BigDecimal number = model.getDisplayToBicDecimal();
         if (number != BigDecimal.ZERO) {
-            model.setDisplay(number.negate());
+            model.setDisplay(number.negate().toPlainString());
         }
     }
 }

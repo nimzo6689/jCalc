@@ -48,7 +48,7 @@ public class RegisterAState implements ICalcState {
 
     @Override
     public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model) {
-        model.setDisplay(new BigDecimal(number.appendNumberTo(model.getDisplay())));
+        model.setDisplay(number.appendNumberTo(model.getDisplay()));
     }
 
     @Override
@@ -67,14 +67,14 @@ public class RegisterAState implements ICalcState {
     @Override
     public void onInputClear(CalcContext context, CalcModel model) {
         model.setRegisterA(BigDecimal.ZERO);
-        model.setDisplay(CalcNumber.ZERO.toBicDecimal());
+        model.setDisplay(CalcNumber.ZERO.getNumber());
     }
 
     @Override
     public void onInputSign(CalcModel model) {
         BigDecimal number = model.getDisplayToBicDecimal();
         if (number != BigDecimal.ZERO) {
-            model.setDisplay(number.negate());
+            model.setDisplay(number.negate().toPlainString());
         }
     }
 }

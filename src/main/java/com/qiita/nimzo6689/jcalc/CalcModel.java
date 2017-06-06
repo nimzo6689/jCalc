@@ -25,8 +25,8 @@ package com.qiita.nimzo6689.jcalc;
 
 import com.qiita.nimzo6689.jcalc.code.Operator;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.Objects;
+import java.util.regex.Matcher;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import lombok.AccessLevel;
@@ -34,6 +34,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.val;
 
 /**
  *
@@ -43,8 +44,6 @@ import lombok.ToString;
 @ToString
 public class CalcModel {
 
-    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,###,###,###,##0.############");
-
     private static final CalcModel INSTANCE = new CalcModel();
 
     public static CalcModel getInstance() {
@@ -52,7 +51,6 @@ public class CalcModel {
     }
 
     private StringProperty displayProperty = null;
-    private String display;
 
     @Getter
     @Setter
@@ -66,28 +64,34 @@ public class CalcModel {
 
     public StringProperty displayProperty() {
         if (Objects.isNull(displayProperty)) {
-            displayProperty = new SimpleStringProperty("0");
+            displayProperty = new SimpleStringProperty(CalcConstants.DISPLAY_INITIAL_VALUE);
         }
         return displayProperty;
     }
 
     public String getDisplay() {
-        if (Objects.nonNull(displayProperty)) {
-            return displayProperty.get().replaceAll(",", "");
-        }
-        return display;
+        return displayProperty.get().replaceAll(",", "");
     }
 
     public BigDecimal getDisplayToBicDecimal() {
         return new BigDecimal(getDisplay());
     }
 
-    public void setDisplay(BigDecimal display) {
-        if (Objects.nonNull(displayProperty)) {
-            displayProperty.set(DECIMAL_FORMAT.format(display));
-        } else {
-            this.display = DECIMAL_FORMAT.format(display);
+    /**
+     *
+     * @param display origin number for displaying.
+     */
+    public void setDisplay(String display) {
+        val displayBigDecimal = new BigDecimal(display);
+        
+        // DecimalFormat can't have LOSS_OF_TRAILING_DIGITS.
+        Matcher lossMatcher = CalcConstants.LOSS_OF_TRAILING_DIGITS.matcher(display);
+        if (lossMatcher.find()) {
+            displayProperty.set(CalcConstants.DECIMAL_FORMAT.format(displayBigDecimal)
+                    + lossMatcher.group());
+            return;
         }
+        displayProperty.set(CalcConstants.DECIMAL_FORMAT.format(displayBigDecimal));
     }
 
 }

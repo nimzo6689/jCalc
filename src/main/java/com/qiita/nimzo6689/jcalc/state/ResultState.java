@@ -48,17 +48,15 @@ public class ResultState implements ICalcState {
 
     @Override
     public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model) {
-        model.setDisplay(number.toBicDecimal());
+        model.setDisplay(number.getNumber());
 
         context.changeCalcStateTo(RegisterAState.getInstance());
     }
 
     @Override
     public void onInputOperator(CalcContext context, Operator operator, CalcModel model) {
-        BigDecimal result = model.getOperator().eval(model.getRegisterA(), model.getRegisterB());
-        model.setDisplay(result);
-        model.setRegisterA(result);
-        model.setRegisterB(BigDecimal.ZERO);
+        model.setRegisterA(model.getDisplayToBicDecimal());
+        model.setOperator(operator);
 
         context.changeCalcStateTo(OperatorState.getInstance());
     }
@@ -72,7 +70,7 @@ public class ResultState implements ICalcState {
     public void onInputClear(CalcContext context, CalcModel model) {
         model.setRegisterA(BigDecimal.ZERO);
         model.setRegisterB(BigDecimal.ZERO);
-        model.setDisplay(CalcNumber.ZERO.toBicDecimal());
+        model.setDisplay(CalcNumber.ZERO.getNumber());
 
         context.changeCalcStateTo(RegisterAState.getInstance());
     }
@@ -81,7 +79,7 @@ public class ResultState implements ICalcState {
     public void onInputSign(CalcModel model) {
         BigDecimal number = model.getDisplayToBicDecimal();
         if (number != BigDecimal.ZERO) {
-            model.setDisplay(number.negate());
+            model.setDisplay(number.negate().toPlainString());
         }
     }
 }
