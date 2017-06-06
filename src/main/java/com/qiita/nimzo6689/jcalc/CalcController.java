@@ -42,7 +42,7 @@ public class CalcController implements Initializable {
 
     @FXML
     private TextArea display;
-    private final CalcModel model = new CalcModel();
+    private final CalcModel model = CalcModel.getInstance();
     private final CalcContext context = CalcContext.INSTANCE;
 
     /**
@@ -61,7 +61,7 @@ public class CalcController implements Initializable {
         // Bind property for display.
         display.textProperty().bind(model.displayProperty());
         // Set default state.
-        context.changeCalcStateTo(RegisterAState.INSTANCE);
+        context.changeCalcStateTo(RegisterAState.getInstance());
     }
 
     /**

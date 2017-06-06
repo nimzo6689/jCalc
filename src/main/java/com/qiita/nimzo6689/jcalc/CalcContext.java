@@ -24,12 +24,15 @@
 package com.qiita.nimzo6689.jcalc;
 
 import com.qiita.nimzo6689.jcalc.state.ICalcState;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 /**
  *
  * @author nimzo6689
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Log4j2
 public enum CalcContext {
 

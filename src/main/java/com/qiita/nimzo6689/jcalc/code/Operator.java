@@ -29,9 +29,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 
+ * @author nimzo6689
+ */
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum Operator {
+
     PLUS("plus") {
         @Override
         public BigDecimal eval(BigDecimal x, BigDecimal y) {

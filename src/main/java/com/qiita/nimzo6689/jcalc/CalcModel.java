@@ -29,7 +29,9 @@ import java.text.DecimalFormat;
 import java.util.Objects;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -37,10 +39,17 @@ import lombok.ToString;
  *
  * @author nimzo6689
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 public class CalcModel {
 
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,###,###,###,##0.############");
+
+    private static final CalcModel INSTANCE = new CalcModel();
+
+    public static CalcModel getInstance() {
+        return INSTANCE;
+    }
 
     private StringProperty displayProperty = null;
     private String display;
@@ -73,7 +82,7 @@ public class CalcModel {
         return new BigDecimal(getDisplay());
     }
 
-    public void setDisplayFromBicDecimal(BigDecimal display) {
+    public void setDisplay(BigDecimal display) {
         if (Objects.nonNull(displayProperty)) {
             displayProperty.set(DECIMAL_FORMAT.format(display));
         } else {

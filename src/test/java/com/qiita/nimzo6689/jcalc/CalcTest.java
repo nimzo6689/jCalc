@@ -52,11 +52,14 @@ public class CalcTest extends ApplicationTest {
     @Test
     public void test_onInputNumber_in_registerA() {
         log.debug("test_onInputNumber_in_registerA");
+        clickOn("#clear");
 
+        log.debug("double-zero");
         clickOn("#zero");
         clickOn("#zero");
         verifyThat("#display", hasText("0"));
 
+        log.debug("double-zero, double-comma");
         clickOn("#zero");
 //        clickOn("#comma");
 //        clickOn("#comma");
@@ -66,9 +69,11 @@ public class CalcTest extends ApplicationTest {
 //        verifyThat("#display", hasText("0.001"));
         verifyThat("#display", hasText("1"));
 
+        log.debug("clear");
         clickOn("#clear");
         verifyThat("#display", hasText("0"));
 
+        log.debug("number format with comma");
         clickOn("#two");
         clickOn("#three");
         clickOn("#four");
@@ -79,6 +84,7 @@ public class CalcTest extends ApplicationTest {
         clickOn("#nine");
         verifyThat("#display", hasText("23,456,789"));
 
+        log.debug("sign");
         clickOn("#sign");
         verifyThat("#display", hasText("-23,456,789"));
     }
@@ -86,6 +92,7 @@ public class CalcTest extends ApplicationTest {
     @Test
     public void test_cycle_operation_result() {
         log.debug("test_cycle_operation_result");
+        clickOn("#clear");
 
         clickOn("#one");
         clickOn("#plus");
@@ -118,6 +125,7 @@ public class CalcTest extends ApplicationTest {
     @Test
     public void test_cycle_registerA_operation_result() {
         log.debug("test_cycle_registerA_operation_result");
+        clickOn("#clear");
 
         // RegisterA -> Operation
         clickOn("#one");

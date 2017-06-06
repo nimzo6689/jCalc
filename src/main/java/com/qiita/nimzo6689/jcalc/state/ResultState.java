@@ -38,72 +38,50 @@ import lombok.ToString;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
-public enum ResultState implements ICalcState {
+public class ResultState implements ICalcState {
 
-    INSTANCE {
-        @Override
-        public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model) {
-            model.setDisplayFromBicDecimal(number.toBicDecimal());
+    private static final ResultState INSTANCE = new ResultState();
 
-            context.changeCalcStateTo(RegisterAState.INSTANCE);
-        }
+    public static ResultState getInstance() {
+        return INSTANCE;
+    }
 
-        @Override
-        public void onInputOperator(CalcContext context, Operator operator, CalcModel model) {
-            BigDecimal result = model.getOperator().eval(model.getRegisterA(), model.getRegisterB());
-            model.setDisplayFromBicDecimal(result);
-            model.setRegisterA(result);
-            model.setRegisterB(BigDecimal.ZERO);
-
-            context.changeCalcStateTo(OperatorState.INSTANCE);
-        }
-
-        @Override
-        public void onInputEqual(CalcContext context, CalcModel model) {
-            // Do nothing.
-        }
-
-        @Override
-        public void onInputClear(CalcContext context, CalcModel model) {
-            model.setRegisterA(BigDecimal.ZERO);
-            model.setRegisterB(BigDecimal.ZERO);
-            model.setDisplayFromBicDecimal(CalcNumber.ZERO.toBicDecimal());
-
-            context.changeCalcStateTo(RegisterAState.INSTANCE);
-        }
-
-        @Override
-        public void onInputSign(CalcModel model) {
-            BigDecimal number = model.getDisplayToBicDecimal();
-            if (number != BigDecimal.ZERO) {
-                model.setDisplayFromBicDecimal(number.negate());
-            }
-        }
-    };
-    
     @Override
     public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model) {
-        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputNumber(context, number, model)");
+        model.setDisplay(number.toBicDecimal());
+
+        context.changeCalcStateTo(RegisterAState.getInstance());
     }
 
     @Override
     public void onInputOperator(CalcContext context, Operator operator, CalcModel model) {
-        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputOperator(context, operator, model)");
+        BigDecimal result = model.getOperator().eval(model.getRegisterA(), model.getRegisterB());
+        model.setDisplay(result);
+        model.setRegisterA(result);
+        model.setRegisterB(BigDecimal.ZERO);
+
+        context.changeCalcStateTo(OperatorState.getInstance());
     }
 
     @Override
     public void onInputEqual(CalcContext context, CalcModel model) {
-        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputEqual(context, model)");
+        // Do nothing.
     }
 
     @Override
     public void onInputClear(CalcContext context, CalcModel model) {
-        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputClear(context, model)");
+        model.setRegisterA(BigDecimal.ZERO);
+        model.setRegisterB(BigDecimal.ZERO);
+        model.setDisplay(CalcNumber.ZERO.toBicDecimal());
+
+        context.changeCalcStateTo(RegisterAState.getInstance());
     }
 
     @Override
     public void onInputSign(CalcModel model) {
-        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputClear(model)");
+        BigDecimal number = model.getDisplayToBicDecimal();
+        if (number != BigDecimal.ZERO) {
+            model.setDisplay(number.negate());
+        }
     }
-
 }

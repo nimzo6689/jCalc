@@ -38,77 +38,55 @@ import lombok.ToString;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
-public enum OperatorState implements ICalcState {
+public class OperatorState implements ICalcState {
 
-    INSTANCE {
-        @Override
-        public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model) {
-            model.setDisplayFromBicDecimal(number.toBicDecimal());
+    private static final OperatorState INSTANCE = new OperatorState();
 
-            context.changeCalcStateTo(RegisterBState.INSTANCE);
-        }
+    public static OperatorState getInstance() {
+        return INSTANCE;
+    }
 
-        @Override
-        public void onInputOperator(CalcContext context, Operator operator, CalcModel model) {
-            model.setOperator(operator);
-        }
-
-        @Override
-        public void onInputEqual(CalcContext context, CalcModel model) {
-            Operator operation = model.getOperator();
-
-            if (Operator.PLUS == operation || Operator.MINUS == operation) {
-                model.setDisplayFromBicDecimal(model.getRegisterA());
-            } else {
-                BigDecimal result = operation.eval(model.getRegisterA(), model.getRegisterB());
-                model.setDisplayFromBicDecimal(result);
-                model.setRegisterA(result);
-                model.setRegisterB(BigDecimal.ZERO);
-            }
-
-            context.changeCalcStateTo(ResultState.INSTANCE);
-        }
-
-        @Override
-        public void onInputClear(CalcContext context, CalcModel model) {
-            model.setRegisterA(BigDecimal.ZERO);
-            model.setDisplayFromBicDecimal(CalcNumber.ZERO.toBicDecimal());
-
-            context.changeCalcStateTo(RegisterAState.INSTANCE);
-        }
-
-        @Override
-        public void onInputSign(CalcModel model) {
-            BigDecimal number = model.getDisplayToBicDecimal();
-            if (number != BigDecimal.ZERO) {
-                model.setDisplayFromBicDecimal(number.negate());
-            }
-        }
-    };
-    
     @Override
     public void onInputNumber(CalcContext context, CalcNumber number, CalcModel model) {
-        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputNumber(context, number, model)");
+        model.setDisplay(number.toBicDecimal());
+
+        context.changeCalcStateTo(RegisterBState.getInstance());
     }
 
     @Override
     public void onInputOperator(CalcContext context, Operator operator, CalcModel model) {
-        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputOperator(context, operator, model)");
+        model.setOperator(operator);
     }
 
     @Override
     public void onInputEqual(CalcContext context, CalcModel model) {
-        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputEqual(context, model)");
+        Operator operation = model.getOperator();
+
+        if (Operator.PLUS == operation || Operator.MINUS == operation) {
+            model.setDisplay(model.getRegisterA());
+        } else {
+            BigDecimal result = operation.eval(model.getRegisterA(), model.getRegisterB());
+            model.setDisplay(result);
+            model.setRegisterA(result);
+            model.setRegisterB(BigDecimal.ZERO);
+        }
+
+        context.changeCalcStateTo(ResultState.getInstance());
     }
 
     @Override
     public void onInputClear(CalcContext context, CalcModel model) {
-        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputClear(context, model)");
+        model.setRegisterA(BigDecimal.ZERO);
+        model.setDisplay(CalcNumber.ZERO.toBicDecimal());
+
+        context.changeCalcStateTo(RegisterAState.getInstance());
     }
 
     @Override
     public void onInputSign(CalcModel model) {
-        throw new UnsupportedOperationException("Use RegisterAState.INSTANCE.onInputClear(model)");
+        BigDecimal number = model.getDisplayToBicDecimal();
+        if (number != BigDecimal.ZERO) {
+            model.setDisplay(number.negate());
+        }
     }
-
 }
