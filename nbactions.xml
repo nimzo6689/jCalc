@@ -5,6 +5,7 @@
         <goals>
             <goal>clean</goal>
             <goal>jfx:run</goal>
+            <goal>-Dmaven.test.skip=true</goal>
         </goals>
         <properties>
             <runfx.args>-jar "${project.build.directory}/${project.build.finalName}.jar"</runfx.args>
@@ -52,45 +53,20 @@
         </goals>
     </action>
     <action>
-            <actionName>CUSTOM-clean site</actionName>
-            <displayName>clean site</displayName>
-            <goals>
-                <goal>clean</goal>
-                <goal>site</goal>
-            </goals>
-        </action>
+        <actionName>CUSTOM-clean site</actionName>
+        <displayName>clean site</displayName>
+        <goals>
+            <goal>clean</goal>
+            <goal>site</goal>
+        </goals>
+    </action>
     <action>
-            <actionName>CUSTOM-clean verify site</actionName>
-            <displayName>clean verify site</displayName>
-            <goals>
-                <goal>clean</goal>
-                <goal>verify</goal>
-                <goal>site</goal>
-            </goals>
-        </action>
-    <action>
-            <actionName>CUSTOM-deploy</actionName>
-            <displayName>deploy</displayName>
-            <goals>
-                <goal>deploy</goal>
-            </goals>
-        </action>
-    <action>
-            <actionName>CUSTOM-install -Dmaven.test.skip=true</actionName>
-            <displayName>install -Dmaven.test.skip=true</displayName>
-            <goals>
-                <goal>install</goal>
-                <goal>-Dmaven.test.skip=true</goal>
-            </goals>
-        </action>
-    <action>
-            <actionName>CUSTOM-clean jfx:run -Dmaven.test.skip=true</actionName>
-            <displayName>clean jfx:run -Dmaven.test.skip=true</displayName>
-            <goals>
-                <goal>clean</goal>
-                <goal>jfx:run</goal>
-                <goal>-Dmaven.test.skip=true</goal>
-            </goals>
-        </action>
-    
+        <actionName>CUSTOM-clean verify site</actionName>
+        <displayName>clean verify site</displayName>
+        <goals>
+            <goal>clean</goal>
+            <goal>verify</goal>
+            <goal>site</goal>
+        </goals>
+    </action>
 </actions>

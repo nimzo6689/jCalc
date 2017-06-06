@@ -81,9 +81,9 @@ public class CalcController implements Initializable {
      * @param event Corresponding to FXML element.
      */
     @FXML
-    public void onInputOperation(ActionEvent event) {
+    public void onInputOperator(ActionEvent event) {
         context.getState().onInputOperator(
-                context, Converts.toOperationFrom(event), model);
+                context, Converts.toOperatorFrom(event), model);
     }
 
     /**

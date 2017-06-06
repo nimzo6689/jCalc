@@ -52,7 +52,7 @@ public final class Converts {
      * @param event Corresponding to FXML element.
      * @return Operator enum object.
      */
-    public static Operator toOperationFrom(ActionEvent event) {
+    public static Operator toOperatorFrom(ActionEvent event) {
         Button btn = (Button) event.getSource();
         return Operator.of(btn.getId());
     }

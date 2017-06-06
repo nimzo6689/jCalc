@@ -25,21 +25,21 @@ digraph ICalcSate {
 
   empty -> RegisterA [label = "start"];
 
-  RegisterA -> Operation [label = "Ope"];
+  RegisterA -> Operator [label = "Ope"];
   RegisterA -> RegisterA [label = "Num, Clear"];
   RegisterA -> Result [label = "Equal"];
 
-  Operation -> RegisterA [label = "Clear"];
-  Operation -> Operation [label = "Ope"];
-  Operation -> RegisterB [label = "Num"];
-  Operation -> Result [label = "Equal"];
+  Operator -> RegisterA [label = "Clear"];
+  Operator -> Operator [label = "Ope"];
+  Operator -> RegisterB [label = "Num"];
+  Operator -> Result [label = "Equal"];
 
-  RegisterB -> Operation [label = "Ope"];
+  RegisterB -> Operator [label = "Ope"];
   RegisterB -> RegisterB [label = "Num, Clear"];
   RegisterB -> Result [label = "Equal"];
 
   Result -> RegisterA [label = "Num, Clear"];
-  Result -> Operation [label = "Ope"];
+  Result -> Operator [label = "Ope"];
   Result -> Result [label = "Equal"];
 
 }

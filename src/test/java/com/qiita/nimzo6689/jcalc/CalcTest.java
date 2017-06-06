@@ -32,7 +32,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import static org.testfx.matcher.base.NodeMatchers.hasText;
 
 /**
- * RegisterA -> Operation -> RegisterB -> Result.
+ * RegisterA -> Operator -> RegisterB -> Result.
  *
  * @author nimzo6689
  */
@@ -90,8 +90,8 @@ public class CalcTest extends ApplicationTest {
     }
 
     @Test
-    public void test_cycle_operation_result() {
-        log.debug("test_cycle_operation_result");
+    public void test_cycle_operator_result() {
+        log.debug("test_cycle_operator_result");
         clickOn("#clear");
 
         clickOn("#one");
@@ -123,17 +123,17 @@ public class CalcTest extends ApplicationTest {
     }
 
     @Test
-    public void test_cycle_registerA_operation_result() {
-        log.debug("test_cycle_registerA_operation_result");
+    public void test_cycle_registerA_operator_result() {
+        log.debug("test_cycle_registerA_operator_result");
         clickOn("#clear");
 
-        // RegisterA -> Operation
+        // RegisterA -> Operator
         clickOn("#one");
         clickOn("#two");
         clickOn("#plus");
         verifyThat("#display", hasText("12"));
 
-        // Operation -> RegisterA
+        // Operator -> RegisterA
         clickOn("#clear");
         clickOn("#clear");
         verifyThat("#display", hasText("0"));
@@ -146,7 +146,7 @@ public class CalcTest extends ApplicationTest {
         clickOn("#clear");
         verifyThat("#display", hasText("0"));
 
-        // RegisterA -> Operation -> Result
+        // RegisterA -> Operator -> Result
 //        clickOn("#five");
 //        clickOn("#times");
 //        clickOn("#equal");
@@ -154,13 +154,13 @@ public class CalcTest extends ApplicationTest {
         clickOn("#two");
         clickOn("#five");
 
-        // Result -> Operation -> RegisterB -> Result 
+        // Result -> Operator -> RegisterB -> Result 
         clickOn("#minus");
         clickOn("#three");
         clickOn("#zero");
         clickOn("#equal");
         verifyThat("#display", hasText("-5"));
-        // Result -> Operation -> RegisterB -> Operation -> Result
+        // Result -> Operator -> RegisterB -> Operator -> Result
 //        clickOn("#plus");
 //        clickOn("#six");
 //        clickOn("#zero");

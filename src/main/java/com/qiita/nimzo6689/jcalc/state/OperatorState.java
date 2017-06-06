@@ -60,12 +60,12 @@ public class OperatorState implements ICalcState {
 
     @Override
     public void onInputEqual(CalcContext context, CalcModel model) {
-        Operator operation = model.getOperator();
+        Operator operator = model.getOperator();
 
-        if (Operator.PLUS == operation || Operator.MINUS == operation) {
+        if (Operator.PLUS == operator || Operator.MINUS == operator) {
             model.setDisplay(model.getRegisterA());
         } else {
-            BigDecimal result = operation.eval(model.getRegisterA(), model.getRegisterB());
+            BigDecimal result = operator.eval(model.getRegisterA(), model.getRegisterB());
             model.setDisplay(result);
             model.setRegisterA(result);
             model.setRegisterB(BigDecimal.ZERO);
