@@ -67,10 +67,6 @@ public enum CalcNumber {
     private final String id;
     private final String number;
 
-    public BigDecimal toBicDecimal() {
-        return new BigDecimal(number);
-    }
-
     /**
      *
      * @param value Number on display.

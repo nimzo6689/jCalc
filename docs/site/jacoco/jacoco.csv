@@ -5,7 +5,7 @@ jCalc,com.qiita.nimzo6689.jcalc.code,Operator.new Operator() {...},0,11,0,0,0,2,
 jCalc,com.qiita.nimzo6689.jcalc.code,Operator.new Operator() {...},0,11,0,0,0,2,0,2,0,2
 jCalc,com.qiita.nimzo6689.jcalc.code,Operator,27,83,1,3,3,9,3,5,2,4
 jCalc,com.qiita.nimzo6689.jcalc.code,Operator.new Operator() {...},0,13,0,0,0,2,0,2,0,2
-jCalc,com.qiita.nimzo6689.jcalc.code,CalcNumber,33,227,2,10,4,25,5,10,3,6
+jCalc,com.qiita.nimzo6689.jcalc.code,CalcNumber,27,227,2,10,3,25,4,10,2,6
 jCalc,com.qiita.nimzo6689.jcalc.state,RegisterBState,0,89,1,1,0,28,1,9,0,9
 jCalc,com.qiita.nimzo6689.jcalc.state,ResultState,12,46,2,0,4,17,2,8,1,8
 jCalc,com.qiita.nimzo6689.jcalc.state,OperatorState,18,65,4,2,5,21,4,8,1,8
@@ -14,4 +14,4 @@ jCalc,com.qiita.nimzo6689.jcalc,Bootstrap,6,20,0,0,3,5,1,3,1,3
 jCalc,com.qiita.nimzo6689.jcalc,CalcConstants,3,9,0,0,1,2,1,1,1,1
 jCalc,com.qiita.nimzo6689.jcalc,CalcController,0,76,0,0,0,20,0,8,0,8
 jCalc,com.qiita.nimzo6689.jcalc,CalcContext,9,40,0,0,0,7,2,4,2,4
-jCalc,com.qiita.nimzo6689.jcalc,CalcModel,30,92,0,4,2,22,2,14,2,12
+jCalc,com.qiita.nimzo6689.jcalc,CalcModel,0,92,0,4,0,22,0,14,0,12

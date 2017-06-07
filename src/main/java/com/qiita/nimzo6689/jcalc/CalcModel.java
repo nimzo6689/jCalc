@@ -33,7 +33,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.val;
 
 /**
@@ -41,7 +40,6 @@ import lombok.val;
  * @author nimzo6689
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@ToString
 public class CalcModel {
 
     private static final CalcModel INSTANCE = new CalcModel();
@@ -58,7 +56,6 @@ public class CalcModel {
     @Getter
     @Setter
     private BigDecimal registerA;
-    @Getter
     @Setter
     private BigDecimal registerB;
 
